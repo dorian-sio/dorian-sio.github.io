@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz avec Vérification Intermédiaire</title>
+  <link rel="stylesheet" href="Quizz.css"/> 
+</head>
+<body>
+
+  <h1>Quiz avec Vérification Intermédiaire</h1>
+
+  <div id="identite">
+    <label for="nom">Entrez votre nom :</label>
+    <input type="text" id="nom" placeholder="Jade Orlabit" autocomplete="off" />
+    <button onclick="commencerQuiz()">Commencer le quiz</button>
+    <h1>Règles</h1>
+    <h2>Il y aura des questions comportant des images, des vidéos ou des extraits audio<br>Il y aura aussi des descriptions<br>
+    Les questions porteront sur le jeu vidéo, la musique , le "cinéma" et autres cultures générales<br>Il n'y a pas de temps limite par question(mais prenez pas 4 ans non plus SVP)<br>Bonne Chance☺</h2>
+    <br>
+    <!-- Se rendre à une certaine question -->
+<label for="goToQuestion">Aller à la question :</label>
+<select id="goToQuestion" onchange="allerAQuestion()">
+  <option value="">-- Choisir une question --</option>
+  <option value="1">Question 1</option>
+  <option value="2">Question 2</option>
+  <option value="3">Question 3</option>
+  <option value="4">Question 4</option>
+  <option value="5">Question 5</option>
+  <option value="6">Question 6</option>
+  <option value="7">Question 7</option>
+  <option value="8">Question 8</option>
+  <option value="9">Question 9</option>
+  <option value="10">Question 10</option>
+  <option value="11">Question 11</option>
+  <option value="12">Question 12</option>
+  <option value="13">Question 13</option>
+  <option value="14">Question 14</option>
+  <option value="15">Question 15</option>
+  <option value="16">Question 16</option>
+  <option value="17">Question 17</option>
+  <option value="18">Question 18</option>
+  <option value="19">Question 19</option>
+  <option value="20">Question 20</option>
+  <option value="21">Question 21</option>
+  <option value="22">Question 22</option>
+  <option value="23">Question 23</option>
+  <option value="24">Question 24</option>
+  <option value="25">Question 25</option>
+  <option value="26">Question 26</option>
+  <option value="27">Question 27</option>
+  <option value="28">Question 28</option>
+  <option value="29">Question 29</option>
+  <option value="30">Question 30</option>
+  <option value="31">Question 31</option>
+  <option value="32">Question 32</option>
+  <option value="33">Question 33</option>
+  <option value="34">Question 34</option>
+  <option value="35">Question 35</option>
+  <option value="36">Question 36</option>
+  <option value="37">Question 37</option>
+  <option value="38">Question 38</option>
+  <option value="39">Question 39</option>
+  <option value="40">Question 40</option>
+  <option value="41">Question 41</option>
+  <option value="42">Question 42</option>
+  <option value="43">Question 43</option>
+  <option value="44">Question 44</option>
+  <option value="45">Question 45</option>
+  <option value="46">Question 46</option>
+  <option value="47">Question 47</option>
+  <option value="48">Question 48</option>
+  <option value="49">Question 49</option>
+  <option value="50">Question 50</option>
+  <option value="51">Question 51</option>
+  <option value="52">Question 52</option>
+  <option value="53">Question 53</option>
+  <option value="54">Question 54</option>
+  <option value="55">Question 55</option>
+  <option value="56">Question 56</option>
+  <option value="57">Question 57</option>
+  <option value="58">Question 58</option>
+  <option value="59">Question 59</option>
+  <option value="60">Question 60</option>
+  <option value="61">Question 61</option>
+  <option value="62">Question 62</option>
+  <option value="63">Question 63</option>
+  <option value="64">Question 64</option>
+  <option value="65">Question 65</option>
+  <option value="66">Question 66</option>
+  <option value="67">Question 67</option>
+  <option value="68">Question 68</option>
+  <option value="69">Question 69</option>
+</select>
+  </div>
+
+<div id="quiz" style="display:none;">
+  <!-- Question 1 -->
+  <div class="question active" id="question1">
+    <h2>1. De quel jeu provient cette musique ?</h2>
+    <input type="radio" name="q1" value="Skies of Arcadia"> Skies of Arcadia<br>
+    <input type="radio" name="q1" value="The Legend of Zelda : Breath of the Wild"> The Legend of Zelda : Breath of the Wild<br>
+    <input type="radio" name="q1" value="Final Fantasy XIII"> Final Fantasy XIII<br>
+    <button class="valider" onclick="verifierReponse(1, 'The Legend of Zelda : Breath of the Wild')">Valider la réponse</button>
+    <audio class="musique" controls src="Musique/miphas-theme.wav"></audio>
+  </div>
+
+  <!-- Résultat Question 1 -->
+  <div class="question" id="feedback1">
+    <p id="feedback1Message" class="feedback"></p>
+    <button onclick="suivant(1)">Suivant</button>
+  </div>
+
+  <!-- Question 2 -->
+  <div class="question" id="question2">
+    <h2>2. De quel jeu provient cette vidéo ?</h2>
+    <input type="radio" name="q2" value="Zelda's Adventure"> Zelda's Adventure<br>
+    <input type="radio" name="q2" value="The Legend of Zelda: Wand of Gamelon"> The Legend of Zelda: Wand of Gamelon<br>
+    <input type="radio" name="q2" value="The Legend of Zelda: Links Faces of Evil"> The Legend of Zelda: Links Faces of Evil<br>
+    <button class="valider" onclick="verifierReponse(2, 'The Legend of Zelda: Links Faces of Evil')">Valider la réponse</button>
+    <video class="video" controls src="Videos/FOE.mp4"></video>
+  </div>
+  
+  <!-- Résultat Question 2 -->
+  <div class="question" id="feedback2">
+    <p id="feedback2Message" class="feedback"></p>
+    <button onclick="suivant(2)">Suivant</button>
+  </div>
+
+  <!-- Question 3 -->
+  <div class="question" id="question3">
+    <h2>3. C'est l'histoire d'un jeune garçon muet dont les parents s'en foutent assez pour le laisser partir à l'aventure avec des bestioles mutantes dans ses grosses boules</h2>
+    <input type="text" id="reponse3" placeholder="Tape ta réponse ici" autocomplete="off"><br>
+    <button class="valider" onclick="verifierReponseTexte(3, ['pokemon', 'pokémon'])">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 3 -->
+  <div class="question" id="feedback3">
+    <p id="feedback3Message" class="feedback"></p>
+    <button onclick="suivant(3)">Suivant</button>
+  </div>
+
+  <!-- Question 4 -->
+  <div class="question" id="question4">
+    <h2>4. De quel jeu provient cette image ?</h2>
+    <input type="text" id="reponse4" placeholder="Tape ta réponse ici" autocomplete="off"><br>
+    <button class="valider" onclick="verifierReponseTexte(4, ['super mario galaxy', 'mario galaxy'])">Valider la réponse</button>
+    <img class="photos" src="images/brasier_galaxy.jpg">
+  </div>
+
+  <!-- Résultat Question 4 -->
+   <div class="question" id="feedback4">
+    <p id="feedback4Message" class="feedback"></p>
+    <button onclick="suivant(4)">Suivant</button>
+   </div>
+
+   <!-- Question 5 -->
+  <div class="question" id="question5">
+    <h2>5. Quel est le langage de programmation le plus bas niveau?</h2>
+    <input type="text" id="reponse5" placeholder="Tape ta réponse ici" autocomplete="off"><br>
+    <button class="valider" onclick="verifierReponseTexte(5, ['binaire', 'le binaire'])">Valider la réponse</button>
+    <img class="photos" src="images/binaire.jpg">
+  </div>
+
+  <!-- Résultat Question 5 -->
+   <div class="question" id="feedback5">
+    <p id="feedback5Message" class="feedback"></p>
+    <button onclick="suivant(5)">Suivant</button>
+   </div>
+
+   <!-- Question 6 -->
+  <div class="question" id="question6">
+    <h2>6. tu incarnes un plombier devenu médecin du jour au lendemain — sans diplôme, sans internat, sans hygiène. Ce type a probablement trouvé son diplôme dans un paquet de céréales. Et son traitement ? Balancer des gélules bicolores à la chaîne dans une fiole où trois virus — un rouge, un bleu et un jaune — dansent la teuf microbienne depuis 1990</h2>
+    <input type="text" id="reponse6" placeholder="Tape ta réponse ici" autocomplete="off"><br>
+    <button class="valider" onclick="verifierReponseTexte(6, ['dr mario', 'docteur mario'])">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 6 -->
+   <div class="question" id="feedback6">
+    <p id="feedback6Message" class="feedback"></p>
+    <button onclick="suivant(6)">Suivant</button>
+   </div>
+
+   <!-- Question 7 -->
+  <div class="question" id="question7">
+    <h2>7. C'est un genre de huis clos spatial avec des bonshommes colorés qui ressemblent à des suppositoires en combinaison. L'objectif? Réparer un vaisseau avec des mini-jeux dignes d'un stage de techno au collège, pendant que l'un d'entre vous joue au tueur en série discret. Sympa, non</h2>
+    <input type="text" id="reponse7" placeholder="Tape ta réponse ici" autocomplete="off"><br>
+    <button class="valider" onclick="verifierReponseTexte(7, ['amongus', 'among us'])">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 7 -->
+   <div class="question" id="feedback7">
+    <p id="feedback7Message" class="feedback"></p>
+    <button onclick="suivant(7)">Suivant</button>
+   </div>
+
+   <!-- Question 8 -->
+  <div class="question" id="question8">
+    <h2>8. De quel jeu provient cette image ?</h2>
+    <input type="text" id="reponse8" placeholder="Tape ta réponse ici" autocomplete="off"><br>
+    <button class="valider" onclick="verifierReponseTexte(8, ['Skies of Arcadia'])">Valider la réponse</button>
+    <img class="photos" src="images/SOA.jpg">
+  </div>
+
+  <!-- Résultat Question 8 -->
+   <div class="question" id="feedback8">
+    <p id="feedback8Message" class="feedback"></p>
+    <button onclick="suivant(8)">Suivant</button>
+   </div>
+
+   <!-- Question 9 -->
+  <div class="question" id="question9">
+    <h2>9. Qui chante cet extrait?</h2>
+    <input type="radio" name="q9" value="Avril Lavigne"> Avril Lavigne<br>
+    <input type="radio" name="q9" value="Paramore"> Paramore<br>
+    <input type="radio" name="q9" value="No Doubt"> No Doubt<br>
+    <button class="valider" onclick="verifierReponse(9, 'Paramore')">Valider la réponse</button>
+    <audio class="musique" controls src="Musique/paramore.mp3"></audio>
+  </div>
+
+  <!-- Résultat Question 9 -->
+   <div class="question" id="feedback9">
+    <p id="feedback9Message" class="feedback"></p>
+    <button onclick="suivant(9)">Suivant</button>
+   </div>
+
+   <!-- Question 10 -->
+  <div class="question" id="question10">
+    <h2>10. Lequel de ces dessins animés n'a pas de chansons à son nom? (Autre que les chansons présentes dans le dessin animé)</h2>
+    <input type="radio" name="q10" value="Oui Oui"> Oui Oui<br>
+    <input type="radio" name="q10" value="Pac Man"> Pac Man<br>
+    <input type="radio" name="q10" value="Inspecteur Gadget"> Inspecteur Gadget<br>
+    <button class="valider" onclick="verifierReponse(10, 'Inspecteur Gadget')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 10 -->
+   <div class="question" id="feedback10">
+    <p id="feedback10Message" class="feedback"></p>
+    <button onclick="suivant(10)">Suivant</button>
+   </div>
+
+   <!-- Question 11 -->
+  <div class="question" id="question11">
+    <h2>11. Qui chante cet extrait?</h2>
+    <input type="radio" name="q11" value="Ultra Vomit"> Ultra Vomit<br>
+    <input type="radio" name="q11" value="Les Béruriers Noirs"> Les Béruriers Noirs<br>
+    <input type="radio" name="q11" value="Tagada Jones"> Tagada Jones<br>
+    <button class="valider" onclick="verifierReponse(11, 'Tagada Jones')">Valider la réponse</button>
+    <audio class="musique" controls src="Musique/Tagada Jones.mp3"></audio>
+  </div>
+
+  <!-- Résultat Question 11 -->
+   <div class="question" id="feedback11">
+    <p id="feedback11Message" class="feedback"></p>
+    <button onclick="suivant(11)">Suivant</button>
+   </div>
+
+   <!-- Question 12 -->
+  <div class="question" id="question12">
+    <h2>12. Qui chante cet extrait?</h2>
+    <input type="radio" name="q12" value="Three Days Grace"> Three Days Grace<br>
+    <input type="radio" name="q12" value="Saint Asonia"> Saint Asonia<br>
+    <input type="radio" name="q12" value="The Weekend"> The Weekend<br>
+    <button class="valider" onclick="verifierReponse(12, 'Saint Asonia')">Valider la réponse</button>
+    <audio class="musique" controls src="Musique/blinding-lights.mp3"></audio>
+  </div>
+
+  <!-- Résultat Question 12 -->
+   <div class="question" id="feedback12">
+    <p id="feedback12Message" class="feedback"></p>
+    <button onclick="suivant(12)">Suivant</button>
+   </div>
+
+   <!-- Question 13 -->
+  <div class="question" id="question13">
+    <h2>13. Qui chante cet extrait?</h2>
+    <input type="radio" name="q13" value="Fatal Bazooka"> Fatal Bazooka<br>
+    <input type="radio" name="q13" value="Michael Youn"> Michael Youn<br>
+    <input type="radio" name="q13" value="Bratisla Boys"> Bratisla Boys<br>
+    <button class="valider" onclick="verifierReponse(13, 'Bratisla Boys')">Valider la réponse</button>
+    <audio class="musique" controls src="Musique/bratisla.mp3"></audio>
+  </div>
+
+  <!-- Résultat Question 13 -->
+   <div class="question" id="feedback13">
+    <p id="feedback13Message" class="feedback"></p>
+    <button onclick="suivant(13)">Suivant</button>
+   </div>
+
+   <!-- Question 14 -->
+  <div class="question" id="question14">
+    <h2>14. Quel personnalité russe est chantée par Boney M?</h2>
+    <input type="radio" name="q14" value="Grigori Rasputin"> Grigori Rasputin<br>
+    <input type="radio" name="q14" value="Michael Youn"> Joseph Staline<br>
+    <input type="radio" name="q14" value="Serguei Prokofiev"> Serguei Prokofiev<br>
+    <button class="valider" onclick="verifierReponse(14, 'Grigori Rasputin')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 14 -->
+   <div class="question" id="feedback14">
+    <p id="feedback14Message" class="feedback"></p>
+    <button onclick="suivant(14)">Suivant</button>
+   </div>
+
+   <!-- Question 15 -->
+  <div class="question" id="question15">
+    <h2>15. Quelle est la chason du film shrek (le 1)?</h2>
+    <input type="radio" name="q15" value="Immigrant Song"> Immigrant Song de Led Zeppelin<br>
+    <input type="radio" name="q15" value="All Star"> All Star de Smash Mouth<br>
+    <input type="radio" name="q15" value="Joker and the Thief"> Joker and the Thief de Wolfmother<br>
+    <button class="valider" onclick="verifierReponse(15, 'All Star')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 15 -->
+   <div class="question" id="feedback15">
+    <p id="feedback15Message" class="feedback"></p>
+    <button onclick="suivant(15)">Suivant</button>
+   </div>
+
+   <!-- Question 16 -->
+  <div class="question" id="question16">
+    <h2>16. De quel chanteur est-ce une parodie?</h2>
+    <input type="radio" name="q16" value="Renaud"> Renaud<br>
+    <input type="radio" name="q16" value="Alain Souchon"> Alain Souchon<br>
+    <input type="radio" name="q16" value="Francis Cabrel"> Francis Cabrel<br>
+    <button class="valider" onclick="verifierReponse(16, 'Renaud')">Valider la réponse</button>
+    <audio class="musique" controls src="Musique/parodie_renaud.mp3"></audio>
+  </div>
+
+  <!-- Résultat Question 16 -->
+   <div class="question" id="feedback16">
+    <p id="feedback16Message" class="feedback"></p>
+    <button onclick="suivant(16)">Suivant</button>
+   </div>
+
+   <!-- Question 17 -->
+  <div class="question" id="question17">
+    <h2>17. De quel chanteur est-ce une parodie?</h2>
+    <input type="radio" name="q17" value="Sexion D'Assaut"> Sexion D'Assaut<br>
+    <input type="radio" name="q17" value="Maitre Gims"> Maitre Gims<br>
+    <input type="radio" name="q17" value="Black M"> Black M<br>
+    <button class="valider" onclick="verifierReponse(17, 'Maitre Gims')">Valider la réponse</button>
+    <audio class="musique" controls src="Musique/Ca mvénère.mp3"></audio>
+  </div>
+
+  <!-- Résultat Question 17 -->
+   <div class="question" id="feedback17">
+    <p id="feedback17Message" class="feedback"></p>
+    <button onclick="suivant(17)">Suivant</button>
+   </div>
+
+   <!-- Question 18 -->
+  <div class="question" id="question18">
+    <h2>18. Pour quelle chanson est connu le groupe Zebda?</h2>
+    <input type="radio" name="q18" value="Bye Bye"> Bye Bye<br>
+    <input type="radio" name="q18" value="Ca m'énerve"> Ca m'énerve<br>
+    <input type="radio" name="q18" value="Tomber la chemise"> Tomber la chemise<br>
+    <button class="valider" onclick="verifierReponse(18, 'Tomber la chemise')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 18 -->
+   <div class="question" id="feedback18">
+    <p id="feedback18Message" class="feedback"></p>
+    <button onclick="suivant(18)">Suivant</button>
+   </div>
+
+   <!-- Question 19 -->
+  <div class="question" id="question19">
+    <h2>19. Quel groupe a pour nom une sauce?</h2>
+    <input type="text" id="reponse19" placeholder="Tape ta réponse ici" autocomplete="off"><br>
+    <button class="valider" onclick="verifierReponseTexte(19, ['Las Ketchup', 'Ketchup'])">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 19 -->
+   <div class="question" id="feedback19">
+    <p id="feedback19Message" class="feedback"></p>
+    <button onclick="suivant(19)">Suivant</button>
+   </div>
+
+   <!-- Question 20 -->
+  <div class="question" id="question20">
+    <h2>20. De quoi parle réellement la comptine 'Il était un petit navire'?</h2>
+    <input type="radio" name="q20" value="Un tuerie de masse"> D'une tuerie de masse<br>
+    <input type="radio" name="q20" value="De cannibalisme"> De cannibalisme<br>
+    <input type="radio" name="q20" value="L'explosion d'une bombe"> De l'explosion d'une bombe<br>
+    <button class="valider" onclick="verifierReponse(20, 'De cannibalisme')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 20 -->
+   <div class="question" id="feedback20">
+    <p id="feedback20Message" class="feedback"></p>
+    <button onclick="suivant(20)">Suivant</button>
+   </div>
+
+   <!-- Question 21 -->
+  <div class="question" id="question21">
+    <h2>21. Qu'est ce que le TAS(Tool Assisted Speedrun)?</h2>
+    <input type="radio" name="q21" value="truc dans le sport"> une institution indépendante au service du sport dans le monde entier. Elle s'occupe de trancher tous les litiges juridiques en lien avec le sport<br>
+    <input type="radio" name="q21" value="Triche"> Un outil de triche dans le JV<br>
+    <input type="radio" name="q21" value="TAS"> Un speedrun fait par ordinateur, où tous les mouvements sont programmés à l'avance<br>
+    <button class="valider" onclick="verifierReponse(21, 'TAS')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 21 -->
+   <div class="question" id="feedback21">
+    <p id="feedback21Message" class="feedback"></p>
+    <button onclick="suivant(21)">Suivant</button>
+   </div>
+
+  <!-- Question 22 -->
+  <div class="question" id="question22">
+    <h2>22. Je suis une célèbre chanson des années 2000 reprise par Jack Black, je suis, je suis, je suis?</h2>
+    <input type="text" id="reponse22" placeholder="Tape ta réponse ici" autocomplete="off"><br>
+    <button class="valider" onclick="verifierReponseTexte(22, ['...Baby One More Time', 'Baby One More Time'])">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 22 -->
+   <div class="question" id="feedback22">
+    <p id="feedback22Message" class="feedback"></p>
+    <button onclick="suivant(22)">Suivant</button>
+   </div>
+
+   <!-- Question 23 -->
+  <div class="question" id="question23">
+    <h2>23. De quelle clip est-ce une parodie?</h2>
+    <input type="text" id="reponse23" placeholder="Tape ta réponse ici" autocomplete="off"><br>
+    <button class="valider" onclick="verifierReponseTexte(23, ['Beat It'])">Valider la réponse</button>
+    <video class="video" controls src="Videos/Mozinor.mp4"></video>
+  </div>
+
+  <!-- Résultat Question 23 -->
+   <div class="question" id="feedback23">
+    <p id="feedback23Message" class="feedback"></p>
+    <button onclick="suivant(23)">Suivant</button>
+   </div>
+
+   <!-- Question 24 -->
+  <div class="question" id="question24">
+    <h2>24. De quelle film est-ce une parodie?</h2>
+    <input type="text" id="reponse24" placeholder="Tape ta réponse ici" autocomplete="off"><br>
+    <button class="valider" onclick="verifierReponseTexte(24, ['Die Hard', 'Piège de Cristal', 'Piege de Cristal'])">Valider la réponse</button>
+    <div class="video-container">
+  <iframe
+    src="https://www.youtube.com/embed/mdt-T2Anbfc"
+    allowfullscreen>
+  </iframe>
+  </div>
+
+  <!-- Résultat Question 24 -->
+   <div class="question" id="feedback24">
+    <p id="feedback24Message" class="feedback"></p>
+    <button onclick="suivant(24)">Suivant</button>
+   </div>
+
+   <!-- Question 25 -->
+  <div class="question" id="question25">
+    <h2>25. De quelle musique de jeu est-ce une reprise?</h2>
+    <input type="radio" name="q25" value="My Time"> My Time<br>
+    <input type="radio" name="q25" value="The Edge of Dawn"> The Edge of Dawn<br>
+    <input type="radio" name="q25" value="Still Alive"> Still Alive<br>
+    <button class="valider" onclick="verifierReponse(25, 'Still Alive')">Valider la réponse</button>
+    <video class="video" controls src="Videos/Still_Alive.mp4"></video>
+  </div>
+
+  <!-- Résultat Question 25 -->
+   <div class="question" id="feedback25">
+    <p id="feedback25Message" class="feedback"></p>
+    <button onclick="suivant(25)">Suivant</button>
+   </div>
+
+   <!-- Question 26 -->
+  <div class="question" id="question26">
+    <h2>26. De quoi est mort Kurt Cobain?</h2>
+    <input type="radio" name="q26" value="De suicide par balle"> De suicide par balle<br>
+    <input type="radio" name="q26" value="Overdose"> D'une overdose<br>
+    <input type="radio" name="q26" value="De cause naturelle"> De cause naturelle<br>
+    <button class="valider" onclick="verifierReponse(26, 'De suicide par balle')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 26 -->
+   <div class="question" id="feedback26">
+    <p id="feedback26Message" class="feedback"></p>
+    <button onclick="suivant(26)">Suivant</button>
+   </div>
+   
+   <!-- Question 27 -->
+  <div class="question" id="question27">
+    <h2>27. Que veut dire l'acronyme TOR?</h2>
+    <input type="radio" name="q27" value="Trick Or Ride"> Trick Or Ride<br>
+    <input type="radio" name="q27" value="The Original Rabbin"> The Original Rabbin<br>
+    <input type="radio" name="q27" value="The Onion Router"> The Onion Router<br>
+    <button class="valider" onclick="verifierReponse(27, 'The Onion Router')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 27 -->
+   <div class="question" id="feedback27">
+    <p id="feedback27Message" class="feedback"></p>
+    <button onclick="suivant(27)">Suivant</button>
+   </div>
+
+   <!-- Question 28 -->
+  <div class="question" id="question28">
+    <h2>28. Quel est le jeu le plus vendu de la Playstation?</h2>
+    <input type="radio" name="q28" value="Gran Turismo"> Gran Turismo<br>
+    <input type="radio" name="q28" value="Final Fanatsy VII"> Final Fanatsy VII<br>
+    <input type="radio" name="q28" value="Crash Bandicoot"> Crash Bandicoot<br>
+    <button class="valider" onclick="verifierReponse(28, 'Gran Turismo')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 28 -->
+   <div class="question" id="feedback28">
+    <p id="feedback28Message" class="feedback"></p>
+    <button onclick="suivant(28)">Suivant</button>
+   </div>
+
+   <!-- Question 29 -->
+  <div class="question" id="question29">
+    <h2>29. Dans la mythologie nordique, qu'est-ce qu'Yggdrasil?</h2>
+    <input type="text" id="reponse29" placeholder="Tape ta réponse ici" autocomplete="off"><br>
+    <button class="valider" onclick="verifierReponseTexte(29, ['l\'arbre monde', 'arbre monde'])">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 29 -->
+   <div class="question" id="feedback29">
+    <p id="feedback29Message" class="feedback"></p>
+    <button onclick="suivant(29)">Suivant</button>
+   </div>
+
+   <!-- Page Explicative entre Q29 et Q30 -->
+  <div class="question" id="explication">
+    <h2>
+      Les prochaines questions seront du type {option 1}, {option 2} ou {les deux}. C'est à dire que je vous donne une phrase, vous me dites si ca s'applique à l'une des propositions, à l'autre ou aux deux.<br>
+      <br>
+      Par exemple, Kate Moss, un Os ou les deux.<br><br>
+      Ne se mange pas, la réponse est les deux.<br>
+      Possède l'autre, le réponse est Kate Moss (Elle possède des os dans son corps). Les deux si ca s'applique aux deux.
+    </h2>
+    <button onclick="suivant('explication')">Continuer</button>
+  </div>
+
+  <!-- Question 30 -->
+  <div class="question" id="question30">
+    <h2>30. PMA, PMU ou les 2? Procréation Médicalement Assistée</h2>
+    <input type="radio" name="q30" value="PMA"> PMA<br>
+    <input type="radio" name="q30" value="PMU"> PMU<br>
+    <input type="radio" name="q30" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(30, 'PMA')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 30 -->
+   <div class="question" id="feedback30">
+    <p id="feedback30Message" class="feedback"></p>
+    <button onclick="suivant(30)">Suivant</button>
+   </div>
+
+   <!-- Question 31 -->
+  <div class="question" id="question31">
+    <h2>31. PMA, PMU ou les 2? Peut se faire avec une tierce personne</h2>
+    <input type="radio" name="q31" value="PMA"> PMA<br>
+    <input type="radio" name="q31" value="PMU"> PMU<br>
+    <input type="radio" name="q31" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(31, 'Les 2')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 31 -->
+   <div class="question" id="feedback31">
+    <p id="feedback31Message" class="feedback"></p>
+    <button onclick="suivant(31)">Suivant</button>
+   </div>
+
+   <!-- Question 32 -->
+  <div class="question" id="question32">
+    <h2>32. PMA, PMU ou les 2? Peut se faire au bistrot du coin</h2>
+    <input type="radio" name="q32" value="PMA"> PMA<br>
+    <input type="radio" name="q32" value="PMU"> PMU<br>
+    <input type="radio" name="q32" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(32, 'PMU')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 32 -->
+   <div class="question" id="feedback32">
+    <p id="feedback32Message" class="feedback"></p>
+    <button onclick="suivant(32)">Suivant</button>
+   </div>
+
+   <!-- Question 33 -->
+  <div class="question" id="question33">
+    <h2>33. MILF, Moufle ou les 2? Est accepté au Scrabble</h2>
+    <input type="radio" name="q33" value="MILF"> MILF<br>
+    <input type="radio" name="q33" value="Moufle"> Moufle<br>
+    <input type="radio" name="q33" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(33, 'Moufle')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 33 -->
+   <div class="question" id="feedback33">
+    <p id="feedback33Message" class="feedback"></p>
+    <button onclick="suivant(33)">Suivant</button>
+   </div>
+
+   <!-- Question 34 -->
+  <div class="question" id="question34">
+    <h2>34. MILF, Moufle ou les 2? Tient chaud l'hiver</h2>
+    <input type="radio" name="q34" value="MILF"> MILF<br>
+    <input type="radio" name="q34" value="Moufle"> Moufle<br>
+    <input type="radio" name="q34" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(34, 'Les 2')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 34 -->
+   <div class="question" id="feedback34">
+    <p id="feedback34Message" class="feedback"></p>
+    <button onclick="suivant(34)">Suivant</button>
+   </div>
+
+   <!-- Question 35 -->
+  <div class="question" id="question35">
+    <h2>35. MILF, Moufle ou les 2? Difficile d'écrire un texto quand t'as la main dedans</h2>
+    <input type="radio" name="q35" value="MILF"> MILF<br>
+    <input type="radio" name="q35" value="Moufle"> Moufle<br>
+    <input type="radio" name="q35" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(35, 'Les 2')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 35 -->
+   <div class="question" id="feedback35">
+    <p id="feedback35Message" class="feedback"></p>
+    <button onclick="suivant(35)">Suivant</button>
+   </div>
+
+   <!-- Question 36 -->
+  <div class="question" id="question36">
+    <h2>36. Hugo Lloris, Le Général De Gaulle ou les 2? A au moins une avenue à son nom</h2>
+    <input type="radio" name="q36" value="Lloris"> Hugo Lloris<br>
+    <input type="radio" name="q36" value="De Gaulle"> Le Général de Gaulle<br>
+    <input type="radio" name="q36" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(36, 'De Gaulle')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 36 -->
+   <div class="question" id="feedback36">
+    <p id="feedback36Message" class="feedback"></p>
+    <button onclick="suivant(36)">Suivant</button>
+   </div>
+
+   <!-- Question 37 -->
+  <div class="question" id="question37">
+    <h2>37. Hugo Lloris, Le Général De Gaulle ou les 2? S'est déjà retrouvé sous les tirs Allemands</h2>
+    <input type="radio" name="q37" value="Lloris"> Hugo Lloris<br>
+    <input type="radio" name="q37" value="De Gaulle"> Le Général de Gaulle<br>
+    <input type="radio" name="q37" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(37, 'Les 2')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 37 -->
+   <div class="question" id="feedback37">
+    <p id="feedback37Message" class="feedback"></p>
+    <button onclick="suivant(37)">Suivant</button>
+   </div>
+
+   <!-- Question 38 -->
+  <div class="question" id="question38">
+    <h2>38. Soirée Romantique, Soirée Rome Antique ou les 2? Tu dînes aux chandelles</h2>
+    <input type="radio" name="q38" value="Romantique"> Romantique<br>
+    <input type="radio" name="q38" value="Rome Antique"> Rome Antique<br>
+    <input type="radio" name="q38" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(38, 'Les 2')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 38 -->
+   <div class="question" id="feedback38">
+    <p id="feedback38Message" class="feedback"></p>
+    <button onclick="suivant(38)">Suivant</button>
+   </div>
+
+   <!-- Question 39 -->
+  <div class="question" id="question39">
+    <h2>39. Soirée Romantique, Soirée Rome Antique ou les 2? Tu es souvent interrompu par un gars qui te vend des roses</h2>
+    <input type="radio" name="q39" value="Romantique"> Romantique<br>
+    <input type="radio" name="q39" value="Rome Antique"> Rome Antique<br>
+    <input type="radio" name="q39" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(39, 'Romantique')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 39 -->
+   <div class="question" id="feedback39">
+    <p id="feedback39Message" class="feedback"></p>
+    <button onclick="suivant(39)">Suivant</button>
+   </div>
+
+   <!-- Question 40 -->
+  <div class="question" id="question40">
+    <h2>40. Soirée Romantique, Soirée Rome Antique ou les 2? Tu te couches pas tard car le lendemain, tu as course de chars à 7h du mat'</h2>
+    <input type="radio" name="q40" value="Romantique"> Romantique<br>
+    <input type="radio" name="q40" value="Rome Antique"> Rome Antique<br>
+    <input type="radio" name="q40" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(40, 'Rome Antique')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 40 -->
+   <div class="question" id="feedback40">
+    <p id="feedback40Message" class="feedback"></p>
+    <button onclick="suivant(40)">Suivant</button>
+   </div>
+
+   <!-- Question 41 -->
+  <div class="question" id="question41">
+    <h2>41. Catégorie YouPorn, Emission TV ou les 2? ADP</h2>
+    <input type="radio" name="q41" value="YouPorn"> Catégorie YouPorn<br>
+    <input type="radio" name="q41" value="TV"> Emission TV<br>
+    <input type="radio" name="q41" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(41, 'TV')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 41 -->
+   <div class="question" id="feedback41">
+    <p id="feedback41Message" class="feedback"></p>
+    <button onclick="suivant(41)">Suivant</button>
+   </div>
+
+   <!-- Question 42 -->
+  <div class="question" id="question42">
+    <h2>42. Catégorie YouPorn, Emission TV ou les 2? BDSM</h2>
+    <input type="radio" name="q42" value="YouPorn"> Catégorie YouPorn<br>
+    <input type="radio" name="q42" value="TV"> Emission TV<br>
+    <input type="radio" name="q42" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(42, 'YouPorn')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 42 -->
+   <div class="question" id="feedback42">
+    <p id="feedback42Message" class="feedback"></p>
+    <button onclick="suivant(42)">Suivant</button>
+   </div>
+
+   <!-- Question 43 -->
+  <div class="question" id="question43">
+    <h2>43. Catégorie YouPorn, Emission TV ou les 2? NSFW</h2>
+    <input type="radio" name="q43" value="YouPorn"> Catégorie YouPorn<br>
+    <input type="radio" name="q43" value="TV"> Emission TV<br>
+    <input type="radio" name="q43" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(43, 'YouPorn')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 43 -->
+   <div class="question" id="feedback43">
+    <p id="feedback43Message" class="feedback"></p>
+    <button onclick="suivant(43)">Suivant</button>
+   </div>
+
+   <!-- Question 44 -->
+  <div class="question" id="question44">
+    <h2>44. Catégorie YouPorn, Emission TV ou les 2? UDPP</h2>
+    <input type="radio" name="q44" value="YouPorn"> Catégorie YouPorn<br>
+    <input type="radio" name="q44" value="TV"> Emission TV<br>
+    <input type="radio" name="q44" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(44, 'TV')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 44 -->
+   <div class="question" id="feedback44">
+    <p id="feedback44Message" class="feedback"></p>
+    <button onclick="suivant(44)">Suivant</button>
+   </div>
+
+   <!-- Question 45 -->
+  <div class="question" id="question45">
+    <h2>45. Catégorie YouPorn, Emission TV ou les 2? BNT</h2>
+    <input type="radio" name="q45" value="YouPorn"> Catégorie YouPorn<br>
+    <input type="radio" name="q45" value="TV"> Emission TV<br>
+    <input type="radio" name="q45" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(45, 'YouPorn')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 45 -->
+   <div class="question" id="feedback45">
+    <p id="feedback45Message" class="feedback"></p>
+    <button onclick="suivant(45)">Suivant</button>
+   </div>
+
+   <!-- Question 46 -->
+  <div class="question" id="question46">
+    <h2>46. Ca tue, Ha ouais... ça tue? ou les deux? Fumer</h2>
+    <input type="radio" name="q46" value="Ca tue"> Ca tue<br>
+    <input type="radio" name="q46" value="Ha ouais... ça tue?"> Ha ouais... ça tue?<br>
+    <input type="radio" name="q46" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(46, 'Ca tue')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 46 -->
+   <div class="question" id="feedback46">
+    <p id="feedback46Message" class="feedback"></p>
+    <button onclick="suivant(46)">Suivant</button>
+   </div>
+
+   <!-- Question 47 -->
+  <div class="question" id="question47">
+    <h2>47. Ca tue, Ha ouais... ça tue? ou les deux? Des vacances à Cuba</h2>
+    <input type="radio" name="q47" value="Ca tue"> Ca tue<br>
+    <input type="radio" name="q47" value="Ha ouais... ça tue?"> Ha ouais... ça tue?<br>
+    <input type="radio" name="q47" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(47, 'Ha ouais... ça tue?')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 47 -->
+   <div class="question" id="feedback47">
+    <p id="feedback47Message" class="feedback"></p>
+    <button onclick="suivant(47)">Suivant</button>
+   </div>
+
+   <!-- Question 48 -->
+  <div class="question" id="question48">
+    <h2>48. Ca tue, Ha ouais... ça tue? ou les deux? Boire ET Conduire</h2>
+    <input type="radio" name="q48" value="Ca tue"> Ca tue<br>
+    <input type="radio" name="q48" value="Ha ouais... ça tue?"> Ha ouais... ça tue?<br>
+    <input type="radio" name="q48" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(48, 'Ca tue')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 48 -->
+   <div class="question" id="feedback48">
+    <p id="feedback48Message" class="feedback"></p>
+    <button onclick="suivant(48)">Suivant</button>
+   </div>
+
+   <!-- Question 49 -->
+  <div class="question" id="question49">
+    <h2>49. Ca tue, Ha ouais... ça tue? ou les deux? Etre une légende du rock à 27 ans</h2>
+    <input type="radio" name="q49" value="Ca tue"> Ca tue<br>
+    <input type="radio" name="q49" value="Ha ouais... ça tue?"> Ha ouais... ça tue?<br>
+    <input type="radio" name="q49" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(49, ['Ca tue', 'Ha ouais... ça tue?', 'Les 2'])">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 49 -->
+   <div class="question" id="feedback49">
+    <p id="feedback49Message" class="feedback"></p>
+    <button onclick="suivant(49)">Suivant</button>
+   </div>
+
+   <!-- Question 50 -->
+  <div class="question" id="question50">
+    <h2>50. Ca tue, Ha ouais... ça tue? ou les deux? Les conflits armés</h2>
+    <input type="radio" name="q50" value="Ca tue"> Ca tue<br>
+    <input type="radio" name="q50" value="Ha ouais... ça tue?"> Ha ouais... ça tue?<br>
+    <input type="radio" name="q50" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(50, 'Ca tue')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 50 -->
+   <div class="question" id="feedback50">
+    <p id="feedback50Message" class="feedback"></p>
+    <button onclick="suivant(50)">Suivant</button>
+   </div>
+
+   <!-- Question 51 -->
+  <div class="question" id="question51">
+    <h2>51. Ca tue, Ha ouais... ça tue? ou les deux? Les confits de canards</h2>
+    <input type="radio" name="q51" value="Ca tue"> Ca tue<br>
+    <input type="radio" name="q51" value="Ha ouais... ça tue?"> Ha ouais... ça tue?<br>
+    <input type="radio" name="q51" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(51, 'Ha ouais... ça tue?')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 51 -->
+   <div class="question" id="feedback51">
+    <p id="feedback51Message" class="feedback"></p>
+    <button onclick="suivant(51)">Suivant</button>
+   </div>
+
+   <!-- Question 52 -->
+  <div class="question" id="question52">
+    <h2>52. Ca tue, Ha ouais... ça tue? ou les deux? Une montagne russe</h2>
+    <input type="radio" name="q52" value="Ca tue"> Ca tue<br>
+    <input type="radio" name="q52" value="Ha ouais... ça tue?"> Ha ouais... ça tue?<br>
+    <input type="radio" name="q52" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(52, 'Ha ouais... ça tue?')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 52 -->
+   <div class="question" id="feedback52">
+    <p id="feedback52Message" class="feedback"></p>
+    <button onclick="suivant(52)">Suivant</button>
+   </div>
+
+   <!-- Question 53 -->
+  <div class="question" id="question53">
+    <h2>53. Ca tue, Ha ouais... ça tue? ou les deux? Une Roulette Russe</h2>
+    <input type="radio" name="q53" value="Ca tue"> Ca tue<br>
+    <input type="radio" name="q53" value="Ha ouais... ça tue?"> Ha ouais... ça tue?<br>
+    <input type="radio" name="q53" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(53, 'Ca tue')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 53 -->
+   <div class="question" id="feedback53">
+    <p id="feedback53Message" class="feedback"></p>
+    <button onclick="suivant(53)">Suivant</button>
+   </div>
+
+   <!-- Question 54 -->
+  <div class="question" id="question54">
+    <h2>54. Ca tue, Ha ouais... ça tue? ou les deux? Une planète</h2>
+    <input type="radio" name="q54" value="Ca tue"> Ca tue<br>
+    <input type="radio" name="q54" value="Ha ouais... ça tue?"> Ha ouais... ça tue?<br>
+    <input type="radio" name="q54" value="Les 2"> Les 2<br>
+    <input type="radio" name="q54" value="Saturne?"> Saturne?<br>
+    <button class="valider" onclick="verifierReponse(54, 'Saturne?')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 54 -->
+   <div class="question" id="feedback54">
+    <p id="feedback54Message" class="feedback"></p>
+    <button onclick="suivant(54)">Suivant</button>
+   </div>
+
+   <!-- Question 55 -->
+  <div class="question" id="question55">
+    <h2>55. Hitchcock, Huge Cock ou les deux? Peut faire peur</h2>
+    <input type="radio" name="q55" value="Hitchcock"> Hitchcock<br>
+    <input type="radio" name="q55" value="Huge Cock"> Huge Cock<br>
+    <input type="radio" name="q55" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(55, 'Les 2')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 55 -->
+   <div class="question" id="feedback55">
+    <p id="feedback55Message" class="feedback"></p>
+    <button onclick="suivant(55)">Suivant</button>
+   </div>
+
+   <!-- Question 56 -->
+  <div class="question" id="question56">
+    <h2>56. Hitchcock, Huge Cock ou les deux? Peut mesurer 1 mètres 70</h2>
+    <input type="radio" name="q56" value="Hitchcock"> Hitchcock<br>
+    <input type="radio" name="q56" value="Huge Cock"> Huge Cock<br>
+    <input type="radio" name="q56" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(56, 'Les 2')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 56 -->
+   <div class="question" id="feedback56">
+    <p id="feedback56Message" class="feedback"></p>
+    <button onclick="suivant(56)">Suivant</button>
+   </div>
+
+   <!-- Question 57 -->
+  <div class="question" id="question57">
+    <h2>57. Hitchcock, Huge Cock ou les deux? Aime les oiseaux</h2>
+    <input type="radio" name="q57" value="Hitchcock"> Hitchcock<br>
+    <input type="radio" name="q57" value="Huge Cock"> Huge Cock<br>
+    <input type="radio" name="q57" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(57, 'Hitchcock')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 57 -->
+   <div class="question" id="feedback57">
+    <p id="feedback57Message" class="feedback"></p>
+    <button onclick="suivant(57)">Suivant</button>
+   </div>
+
+   <!-- Question 58 -->
+  <div class="question" id="question58">
+    <h2>58. Hitchcock, Huge Cock ou les deux? Est dans plein de films</h2>
+    <input type="radio" name="q58" value="Hitchcock"> Hitchcock<br>
+    <input type="radio" name="q58" value="Huge Cock"> Huge Cock<br>
+    <input type="radio" name="q58" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(58, 'Les 2')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 58 -->
+   <div class="question" id="feedback58">
+    <p id="feedback58Message" class="feedback"></p>
+    <button onclick="suivant(58)">Suivant</button>
+   </div>
+
+   <!-- Question 59 -->
+  <div class="question" id="question59">
+    <h2>59. Hitchcock, Huge Cock ou les deux? Restera dans les annales</h2>
+    <input type="radio" name="q59" value="Hitchcock"> Hitchcock<br>
+    <input type="radio" name="q59" value="Huge Cock"> Huge Cock<br>
+    <input type="radio" name="q59" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(59, 'Hitchcock')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 59 -->
+   <div class="question" id="feedback59">
+    <p id="feedback59Message" class="feedback"></p>
+    <button onclick="suivant(59)">Suivant</button>
+   </div>
+
+   <!-- Question 60 -->
+  <div class="question" id="question60">
+    <h2>60. Insecte, Une Secte ou les deux? Attire les pigeons</h2>
+    <input type="radio" name="q60" value="Insecte"> Insecte<br>
+    <input type="radio" name="q60" value="Une Secte"> Une Secte<br>
+    <input type="radio" name="q60" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(60, 'Les 2')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 60 -->
+   <div class="question" id="feedback60">
+    <p id="feedback60Message" class="feedback"></p>
+    <button onclick="suivant(60)">Suivant</button>
+   </div>
+
+   <!-- Question 61 -->
+  <div class="question" id="question61">
+    <h2>61. Insecte, Une Secte ou les deux? Travaille en bande organisée</h2>
+    <input type="radio" name="q61" value="Insecte"> Insecte<br>
+    <input type="radio" name="q61" value="Une Secte"> Une Secte<br>
+    <input type="radio" name="q61" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(61, 'Les 2')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 61 -->
+   <div class="question" id="feedback61">
+    <p id="feedback61Message" class="feedback"></p>
+    <button onclick="suivant(61)">Suivant</button>
+   </div>
+
+   <!-- Question 62 -->
+  <div class="question" id="question62">
+    <h2>62. Insecte, Une Secte ou les deux? A souvent un Gourou</h2>
+    <input type="radio" name="q62" value="Insecte"> Insecte<br>
+    <input type="radio" name="q62" value="Une Secte"> Une Secte<br>
+    <input type="radio" name="q62" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(62, 'Une Secte')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 62 -->
+   <div class="question" id="feedback62">
+    <p id="feedback62Message" class="feedback"></p>
+    <button onclick="suivant(62)">Suivant</button>
+   </div>
+
+   <!-- Question 63 -->
+  <div class="question" id="question63">
+    <h2>63. Insecte, Une Secte ou les deux? Difficile d'y entrer</h2>
+    <input type="radio" name="q63" value="Insecte"> Insecte<br>
+    <input type="radio" name="q63" value="Une Secte"> Une Secte<br>
+    <input type="radio" name="q63" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(63, 'Insecte')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 63 -->
+   <div class="question" id="feedback63">
+    <p id="feedback63Message" class="feedback"></p>
+    <button onclick="suivant(63)">Suivant</button>
+   </div>
+
+   <!-- Question 64 -->
+  <div class="question" id="question64">
+    <h2>64. Insecte, Une Secte ou les deux? Difficile d'en sortir</h2>
+    <input type="radio" name="q64" value="Insecte"> Insecte<br>
+    <input type="radio" name="q64" value="Une Secte"> Une Secte<br>
+    <input type="radio" name="q64" value="Les 2"> Les 2<br>
+    <button class="valider" onclick="verifierReponse(64, 'Une Secte')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 64 -->
+   <div class="question" id="feedback64">
+    <p id="feedback64Message" class="feedback"></p>
+    <button onclick="suivant(64)">Suivant</button>
+   </div>
+
+   <!-- Question 65 -->
+  <div class="question" id="question65">
+    <h2>65. Dans la chanson "La Zoubida", qui a volé le scouter?</h2>
+    <input type="radio" name="q65" value="François"> François<br>
+    <input type="radio" name="q65" value="Amed"> Amed<br>
+    <input type="radio" name="q65" value="Moktar"> Moktar<br>
+    <button class="valider" onclick="verifierReponse(65, 'Moktar')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 65 -->
+   <div class="question" id="feedback65">
+    <p id="feedback65Message" class="feedback"></p>
+    <button onclick="suivant(65)">Suivant</button>
+   </div>
+
+   <!-- Question 66 -->
+  <div class="question" id="question66">
+    <h2>66. Une racine carrée est une plante avec 4 angles égaux?</h2>
+    <input type="radio" name="q66" value="Vrai"> Vrai<br>
+    <input type="radio" name="q66" value="Faux"> Faux<br>
+    <button class="valider" onclick="verifierReponse(66, 'Faux')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 66 -->
+   <div class="question" id="feedback66">
+    <p id="feedback66Message" class="feedback"></p>
+    <button onclick="suivant(66)">Suivant</button>
+   </div>
+
+   <!-- Question 67 -->
+  <div class="question" id="question67">
+    <h2>67. La capitale de Taïwan est Made In?</h2>
+    <input type="radio" name="q67" value="Vrai"> Vrai<br>
+    <input type="radio" name="q67" value="Faux"> Faux<br>
+    <button class="valider" onclick="verifierReponse(67, 'Faux')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 67 -->
+   <div class="question" id="feedback67">
+    <p id="feedback67Message" class="feedback"></p>
+    <button onclick="suivant(67)">Suivant</button>
+   </div>
+
+   <!-- Question 68 -->
+  <div class="question" id="question68">
+    <h2>68. Vous pensez qu'un triangle c'est un carré à trois côtés?</h2>
+    <input type="radio" name="q68" value="Vrai"> Vrai<br>
+    <input type="radio" name="q68" value="Faux"> Faux<br>
+    <button class="valider" onclick="verifierReponse(68, ['Vrai', 'Faux'])">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 68 -->
+   <div class="question" id="feedback68">
+    <p id="feedback68Message" class="feedback"></p>
+    <button onclick="suivant(68)">Suivant</button>
+   </div>
+
+   <!-- Question 69 -->
+  <div class="question" id="question69">
+    <h2>69. Vous pensez qu'un chinois avec des écouteurs c'est un nem P3?</h2>
+    <input type="radio" name="q69" value="Vrai"> Vrai<br>
+    <input type="radio" name="q69" value="Faux"> Faux<br>
+    <button class="valider" onclick="verifierReponse(69, ['Vrai', 'Faux'])">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 69 -->
+   <div class="question" id="feedback69">
+    <p id="feedback69Message" class="feedback"></p>
+    <button onclick="suivant(69)">Suivant</button>
+   </div>
+
+  <!-- Résultat Final -->
+  <div class="question" id="resultat">
+    <p class="result" id="score"></p>
+    <button onclick="recommencerQuiz()">Recommencer le quiz</button>
+  </div>
+</div>
+
+<!-- Firebase compatibilité pour HTML pur -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+  <script>
+
+    let participantNom = "";
+    let score = 0;
+
+    function commencerQuiz() {
+      const nomInput = document.getElementById("nom").value.trim();
+      if (!nomInput) {
+        alert("Veuillez entrer votre nom.");
+        return;
+      }
+      participantNom = nomInput;
+      document.getElementById("identite").style.display = "none";
+      document.getElementById("quiz").style.display = "block";
+    }
+
+    // Fonction pour vérifier la réponse à chaque question
+    function verifierReponse(numero, bonneReponse) {
+    const reponse = document.querySelector(`input[name="q${numero}"]:checked`);
+    if (!reponse) {
+    alert("Veuillez choisir une réponse avant de continuer.");
+    return;
+  }
+
+  const feedback = document.getElementById(`feedback${numero}`);
+  const feedbackMessage = document.getElementById(`feedback${numero}Message`);
+
+  let estCorrect;
+  if (Array.isArray(bonneReponse)) {
+    estCorrect = bonneReponse.includes(reponse.value);
+  } else {
+    estCorrect = reponse.value === bonneReponse;
+  }
+
+  if (estCorrect) {
+    feedbackMessage.textContent = "Bonne réponse !";
+    feedbackMessage.classList.add('correct');
+    feedbackMessage.classList.remove('incorrect');
+    score++;
+  } else {
+    feedbackMessage.textContent = `Mauvaise réponse ! La bonne réponse était : ${Array.isArray(bonneReponse) ? bonneReponse.join(" / ") : bonneReponse}.`;
+    feedbackMessage.classList.add('incorrect');
+    feedbackMessage.classList.remove('correct');
+  }
+
+  // 🔴 🔥 Enregistrer dans Firestore
+  db.collection("reponsesQuiz").add({
+        participant: participantNom,
+        question: numero,
+        reponseDonnee: reponse.value,
+        bonneReponse: bonneReponse,
+        correcte: estCorrect,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+      document.getElementById(`question${numero}`).classList.remove("active");
+      feedback.classList.add("active");
+    }
+
+    function verifierReponseTexte(numeroQuestion, bonnesReponses) {
+    const saisie = document.getElementById(`reponse${numeroQuestion}`).value.trim().toLowerCase();
+    const feedback = document.getElementById(`feedback${numeroQuestion}`);
+    const feedbackMessage = document.getElementById(`feedback${numeroQuestion}Message`);
+
+  // Vérifie si la saisie correspond à une des bonnes réponses
+  const estCorrect = bonnesReponses.some(rep => saisie === rep.toLowerCase());
+
+  if (estCorrect) {
+    feedbackMessage.textContent = "Bonne réponse !";
+    feedbackMessage.classList.add('correct');
+    feedbackMessage.classList.remove('incorrect');
+    score++;
+  } else {
+    feedbackMessage.textContent = `Mauvaise réponse ! Les bonnes réponses possibles étaient : ${bonnesReponses.join(', ')}.`;
+    feedbackMessage.classList.add('incorrect');
+    feedbackMessage.classList.remove('correct');
+  }
+
+  // 🔥 Enregistrer dans Firestore
+  db.collection("reponsesQuiz").add({
+    participant: participantNom,
+    question: numeroQuestion,
+    reponseDonnee: saisie,
+    bonnesReponses: bonnesReponses,
+    bonneReponse: bonnesReponses[0],
+    correcte: estCorrect,
+    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+  });
+
+  document.getElementById(`question${numeroQuestion}`).classList.remove("active");
+  feedback.classList.add("active");
+}
+
+    // Fonction pour passer à la question suivante ou afficher le score final
+    function suivant(numero){
+        // Liste des sauts spéciaux (page explicative, etc.)
+        const prochainBloc = {
+          29: 'explication',
+          'explication': 30,
+          30: 31,
+          31: 32,
+          32: 33,
+          33: 34,
+          34: 35,
+          35: 36,
+          36: 37,
+          37: 38,
+          38: 39,
+          39: 40,
+          40: 41,
+          41: 42,
+          42: 43,
+          43: 44,
+          44: 45,
+          45: 46,
+          46: 47,
+          47: 48,
+          48: 49,
+          49: 50,
+          50: 51,
+          51: 52,
+          52: 53,
+          53: 54,
+          54: 55,
+          55: 56,
+          56: 57,
+          57: 58,
+          58: 59,
+          59: 60,
+          60: 61,
+          61: 62,
+          62: 63,
+          63: 64,
+          64: 65,
+          65: 66,
+          66: 67,
+          67: 68,
+          68: 69,
+          69: 'resultat' // mets ici le numéro de ta dernière question
+        };
+
+      // Trouver l'élément suivant à afficher
+      const suivantId = prochainBloc[numero] !== undefined ? prochainBloc[numero] : numero + 1;
+
+      // Cacher l'élément actuel (question ou feedback)
+      const actuelId = typeof numero === "string" ? numero : `feedback${numero}`;
+      const actuelElement = document.getElementById(actuelId);
+      if (actuelElement) {
+        actuelElement.classList.remove("active");
+      }
+
+      // Si on arrive au résultat final
+      if (suivantId === 'resultat') {
+          document.getElementById("resultat").classList.add("active");
+          document.getElementById("score").textContent = `Votre score : ${score} / 69`; // adapte au total
+          // 🔥 Enregistrement du score final dans Firestore
+          db.collection("scoresQuiz").add({
+          participant: participantNom,
+          score: score,
+          totalQuestions: 30, // ajuste ce nombre si tu en ajoutes
+          timestamp: firebase.firestore.FieldValue.serverTimestamp()
+          });
+      } else {
+      // Afficher la question ou explication suivante
+      const nextElement = typeof suivantId === "number"
+      ? document.getElementById(`question${suivantId}`)
+      : document.getElementById(suivantId);
+
+      if (nextElement) {
+        nextElement.classList.add("active");
+      }
+
+      // Arrêter tous les lecteurs audio
+          const audios = document.querySelectorAll('audio');
+          audios.forEach(audio => {
+          audio.pause();
+          audio.currentTime = 0;
+      });
+
+      // Arrêter tous les lecteurs vidéo
+          const videos = document.querySelectorAll('video');
+          videos.forEach(video => {
+          video.pause();
+          video.currentTime = 0;
+      });}
+    if (suivantId === 'resultat') {
+  document.getElementById("resultat").classList.add("active");
+  document.getElementById("score").textContent = `Votre score : ${score} / 69`; // adapte au total
+  }
+
+  // 🔥 Enregistrement du score final dans Firestore
+  db.collection("scoresQuiz").add({
+    participant: participantNom,
+    score: score,
+    totalQuestions: 30, // ajuste ce nombre si tu en ajoutes
+    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+  })};
+
+    // Fonction pour recommencer le quiz
+    function recommencerQuiz() {
+  // Réinitialiser les variables et le score
+  score = 0;
+
+  // Réinitialiser tous les éléments du quiz
+  const questions = document.querySelectorAll('.question');
+  questions.forEach((q) => q.classList.remove('active'));
+
+  // Réinitialiser les boutons radio et champs texte
+  const radios = document.querySelectorAll('input[type="radio"]');
+  radios.forEach((radio) => radio.checked = false);
+
+  const textes = document.querySelectorAll('input[type="text"]');
+  textes.forEach((champ) => champ.value = '');
+
+  // Réafficher l'écran d'identité (nom)
+  document.getElementById("identite").style.display = "block";
+
+  // Cacher la section quiz
+  document.getElementById("quiz").style.display = "none";
+}
+
+  // 🔧 Configuration Firebase (à adapter avec tes vraies infos)
+  const firebaseConfig = {
+    apiKey: "AIzaSyDNf6qrVBkrHyUM0SRqJ8UbkxAIh7-lErU",
+    authDomain: "test-fe2c7.firebaseapp.com",
+    databaseURL: "https://test-fe2c7-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "test-fe2c7",
+    storageBucket: "test-fe2c7.firebasestorage.app",
+    messagingSenderId: "939201608583",
+    appId: "1:939201608583:web:f15a2483910ee8c77fb122"
+  };
+
+  //Passer à la question suivante pour les zones de texte
+
+  // 🔥 Initialisation Firebase + Firestore
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+function allerAQuestion() {
+  const select = document.getElementById("goToQuestion");
+  const numero = select.value;
+  if (numero) {
+    // Cacher toutes les questions et feedback
+    document.querySelectorAll('.question').forEach(div => {
+      div.classList.remove('active');
+    });
+
+    // Activer la question choisie
+    const question = document.getElementById(`question${numero}`);
+    if (question) {
+      question.classList.add('active');
+    }
+  }
+}
+</script>
+</body>
+</html>
