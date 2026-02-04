@@ -5,3 +5,9 @@ h1{
 .texte{
     font-size: 30px;
 }
+
+a,
+a:visited {
+  color: #58a6ff;
+  text-decoration: none;
+}
