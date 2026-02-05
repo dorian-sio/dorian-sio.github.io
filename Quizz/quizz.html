@@ -1174,69 +1174,60 @@
       document.getElementById("quiz").style.display = "block";
     }
 
-    // Fonction pour vérifier la réponse à chaque question
-    function verifierReponse(numero, bonneReponse) {
+    // Fonction pour les questions à choix radio
+function verifierReponse(numero, bonneReponse) {
     const reponse = document.querySelector(`input[name="q${numero}"]:checked`);
-    if (!reponse) {
-    alert("Veuillez choisir une réponse avant de continuer.");
-    return;
-  }
+    if (!reponse) { alert("Veuillez choisir une réponse."); return; }
 
-  const feedback = document.getElementById(`feedback${numero}`);
-  const feedbackMessage = document.getElementById(`feedback${numero}Message`);
+    const feedback = document.getElementById(`feedback${numero}`);
+    const feedbackMessage = document.getElementById(`feedback${numero}Message`);
 
-  let estCorrect;
-  if (Array.isArray(bonneReponse)) {
-    estCorrect = bonneReponse.includes(reponse.value);
-  } else {
-    estCorrect = reponse.value === bonneReponse;
-  }
+    let estCorrect = Array.isArray(bonneReponse) ? bonneReponse.includes(reponse.value) : reponse.value === bonneReponse;
 
-  if (estCorrect) {
-    feedbackMessage.textContent = "Bonne réponse !";
-    feedbackMessage.classList.add('correct');
-    feedbackMessage.classList.remove('incorrect');
-    score++;
-  } else {
-    feedbackMessage.textContent = `Mauvaise réponse ! La bonne réponse était : ${Array.isArray(bonneReponse) ? bonneReponse.join(" / ") : bonneReponse}.`;
-    feedbackMessage.classList.add('incorrect');
-    feedbackMessage.classList.remove('correct');
-  }
+    feedbackMessage.textContent = estCorrect ? "Bonne réponse !" : `Mauvaise réponse ! La bonne réponse était : ${Array.isArray(bonneReponse) ? bonneReponse.join(' / ') : bonneReponse}.`;
+    feedbackMessage.classList.add(estCorrect ? 'correct' : 'incorrect');
+    feedbackMessage.classList.remove(estCorrect ? 'incorrect' : 'correct');
 
-  // 🔴 🔥 Enregistrer dans Firestore
-  db.collection("reponsesQuiz").add({
+    document.getElementById(`question${numero}`).classList.remove("active");
+    feedback.classList.add("active");
+
+    // 🔴 Enregistrement Firestore
+    db.collection("reponsesQuiz").add({
         participant: participantNom,
         question: numero,
         reponseDonnee: reponse.value,
         bonneReponse: bonneReponse,
         correcte: estCorrect,
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
-      });
+    });
+}
 
-      function verifierReponseTexte(numeroQuestion, bonnesReponses) {
+// Fonction pour les questions texte
+function verifierReponseTexte(numeroQuestion, bonnesReponses) {
     const saisie = document.getElementById(`reponse${numeroQuestion}`).value.trim().toLowerCase();
     const feedback = document.getElementById(`feedback${numeroQuestion}`);
     const feedbackMessage = document.getElementById(`feedback${numeroQuestion}Message`);
 
     const estCorrect = bonnesReponses.some(rep => saisie === rep.toLowerCase());
 
-    if (estCorrect) {
-        feedbackMessage.textContent = "Bonne réponse !";
-        feedbackMessage.classList.add('correct');
-        feedbackMessage.classList.remove('incorrect');
-        score++;
-    } else {
-        feedbackMessage.textContent = `Mauvaise réponse ! Les bonnes réponses possibles étaient : ${bonnesReponses.join(', ')}.`;
-        feedbackMessage.classList.add('incorrect');
-        feedbackMessage.classList.remove('correct');
-    }
+    feedbackMessage.textContent = estCorrect ? "Bonne réponse !" : `Mauvaise réponse ! Les bonnes réponses possibles étaient : ${bonnesReponses.join(', ')}.`;
+    feedbackMessage.classList.add(estCorrect ? 'correct' : 'incorrect');
+    feedbackMessage.classList.remove(estCorrect ? 'incorrect' : 'correct');
 
-    // Masquer la question actuelle
-    const questionDiv = document.getElementById(`question${numeroQuestion}`);
-    if (questionDiv) questionDiv.classList.remove("active");
+    document.getElementById(`question${numeroQuestion}`).classList.remove("active");
+    feedback.classList.add("active");
 
-// Afficher le feedback
-if (feedback) feedback.classList.add("active");
+    // 🔴 Enregistrement Firestore
+    db.collection("reponsesQuiz").add({
+        participant: participantNom,
+        question: numeroQuestion,
+        reponseDonnee: saisie,
+        bonnesReponses: bonnesReponses,
+        bonneReponse: bonnesReponses[0],
+        correcte: estCorrect,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
+}
 
 // Si tu veux, tu peux passer automatiquement à la question suivante après quelques secondes :
 // setTimeout(() => suivant(numeroQuestion), 2000);
