@@ -1231,8 +1231,11 @@
     const questionDiv = document.getElementById(`question${numeroQuestion}`);
     if (questionDiv) questionDiv.classList.remove("active");
 
-    // Afficher le feedback
-    if (feedback) feedback.classList.add("active");
+// Afficher le feedback
+if (feedback) feedback.classList.add("active");
+
+// Si tu veux, tu peux passer automatiquement à la question suivante après quelques secondes :
+// setTimeout(() => suivant(numeroQuestion), 2000);
 }
 
   // 🔥 Enregistrer dans Firestore
