@@ -427,7 +427,10 @@
     <h2>23. De quelle clip est-ce une parodie?</h2>
     <input type="text" id="reponse23" placeholder="Tape ta réponse ici" autocomplete="off"><br>
     <button class="valider" onclick="verifierReponseTexte(23, ['Beat It'])">Valider la réponse</button>
-    <video class="video" controls src="Videos/Mozinor.mp4"></video>
+    <video class="video" controls>
+        <source src="Videos/Mozinor.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas la vidéo.
+      </video>
   </div>
 
   <!-- Résultat Question 23 -->
@@ -461,7 +464,10 @@
     <input type="radio" name="q25" value="The Edge of Dawn"> The Edge of Dawn<br>
     <input type="radio" name="q25" value="Still Alive"> Still Alive<br>
     <button class="valider" onclick="verifierReponse(25, 'Still Alive')">Valider la réponse</button>
-    <video class="video" controls src="Videos/Still_Alive.mp4"></video>
+    <video class="video" controls>
+        <source src="Videos/Still_Alive.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas la vidéo.
+      </video>
   </div>
 
   <!-- Résultat Question 25 -->
