@@ -1209,28 +1209,31 @@
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
       });
 
-      document.getElementById(`question${numero}`).classList.remove("active");
-      feedback.classList.add("active");
-    }
-
-    function verifierReponseTexte(numeroQuestion, bonnesReponses) {
+      function verifierReponseTexte(numeroQuestion, bonnesReponses) {
     const saisie = document.getElementById(`reponse${numeroQuestion}`).value.trim().toLowerCase();
     const feedback = document.getElementById(`feedback${numeroQuestion}`);
     const feedbackMessage = document.getElementById(`feedback${numeroQuestion}Message`);
 
-  // Vérifie si la saisie correspond à une des bonnes réponses
-  const estCorrect = bonnesReponses.some(rep => saisie === rep.toLowerCase());
+    const estCorrect = bonnesReponses.some(rep => saisie === rep.toLowerCase());
 
-  if (estCorrect) {
-    feedbackMessage.textContent = "Bonne réponse !";
-    feedbackMessage.classList.add('correct');
-    feedbackMessage.classList.remove('incorrect');
-    score++;
-  } else {
-    feedbackMessage.textContent = `Mauvaise réponse ! Les bonnes réponses possibles étaient : ${bonnesReponses.join(', ')}.`;
-    feedbackMessage.classList.add('incorrect');
-    feedbackMessage.classList.remove('correct');
-  }
+    if (estCorrect) {
+        feedbackMessage.textContent = "Bonne réponse !";
+        feedbackMessage.classList.add('correct');
+        feedbackMessage.classList.remove('incorrect');
+        score++;
+    } else {
+        feedbackMessage.textContent = `Mauvaise réponse ! Les bonnes réponses possibles étaient : ${bonnesReponses.join(', ')}.`;
+        feedbackMessage.classList.add('incorrect');
+        feedbackMessage.classList.remove('correct');
+    }
+
+    // Masquer la question actuelle
+    const questionDiv = document.getElementById(`question${numeroQuestion}`);
+    if (questionDiv) questionDiv.classList.remove("active");
+
+    // Afficher le feedback
+    if (feedback) feedback.classList.add("active");
+}
 
   // 🔥 Enregistrer dans Firestore
   db.collection("reponsesQuiz").add({
