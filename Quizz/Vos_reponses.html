@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)http://localhost:8000/test_quizz/Reponses.html -->
+<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>Réponses des participants</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: #24f335;
+      padding: 20px;
+      background-image: url(images/binaire.jpg);
+      background-size: cover;       /* L'image couvre toute la page */
+      background-repeat: no-repeat; /* Pas de répétition */
+      background-attachment: fixed; /* L'image reste fixe au scroll */
+      background-position: center;  /* Centrée */
+      -webkit-text-stroke: 0.5px black; /* contour noir */
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    #tabs button {
+      margin-right: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    #tabs button:hover {
+      background-color: #ddd;
+    }
+    #tabs button.active {
+      background-color: #ccc;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Réponses des Participants</h1>
+  <div id="filteredResults">
+    <table style="width: 100%; border-collapse: collapse;">
+      <thead>
+        <tr>
+          <th>Participant</th>
+          <th>Question</th>
+          <th>Réponse donnée</th>
+          <th>Bonne réponse</th>
+          <th>Correcte</th>
+          <th>Timestamp</th>
+        </tr>
+      </thead>
+      <tbody id="responseBody"><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>1</td>
+        <td>Final Fantasy XIII</td>
+        <td>The Legend of Zelda : Breath of the Wild</td>
+        <td>❌</td>
+        <td>16/09/2025 13:21:28</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>1</td>
+        <td>The Legend of Zelda : Breath of the Wild</td>
+        <td>The Legend of Zelda : Breath of the Wild</td>
+        <td>✅</td>
+        <td>16/09/2025 13:21:34</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>2</td>
+        <td>The Legend of Zelda: Links Faces of Evil</td>
+        <td>The Legend of Zelda: Links Faces of Evil</td>
+        <td>✅</td>
+        <td>16/09/2025 13:21:49</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>2</td>
+        <td>The Legend of Zelda: Wand of Gamelon</td>
+        <td>The Legend of Zelda: Links Faces of Evil</td>
+        <td>❌</td>
+        <td>16/09/2025 13:22:07</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>3</td>
+        <td>pokémon</td>
+        <td>pokemon</td>
+        <td>✅</td>
+        <td>16/09/2025 13:22:02</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>3</td>
+        <td>je sais pas</td>
+        <td>pokemon</td>
+        <td>❌</td>
+        <td>16/09/2025 13:22:57</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>4</td>
+        <td>mario galaxy</td>
+        <td>super mario galaxy</td>
+        <td>✅</td>
+        <td>16/09/2025 13:22:21</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>4</td>
+        <td>zelda</td>
+        <td>super mario galaxy</td>
+        <td>❌</td>
+        <td>16/09/2025 13:23:59</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>5</td>
+        <td>assembleur</td>
+        <td>binaire</td>
+        <td>❌</td>
+        <td>16/09/2025 13:25:12</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>5</td>
+        <td>binaire</td>
+        <td>binaire</td>
+        <td>✅</td>
+        <td>16/09/2025 13:23:39</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>6</td>
+        <td>dr. mario</td>
+        <td>dr mario</td>
+        <td>❌</td>
+        <td>16/09/2025 13:24:04</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>6</td>
+        <td>mario</td>
+        <td>dr mario</td>
+        <td>❌</td>
+        <td>16/09/2025 13:26:16</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>7</td>
+        <td>among us</td>
+        <td>amongus</td>
+        <td>✅</td>
+        <td>16/09/2025 13:27:36</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>7</td>
+        <td>amongous :d</td>
+        <td>amongus</td>
+        <td>❌</td>
+        <td>16/09/2025 13:24:59</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>8</td>
+        <td>monster hunter</td>
+        <td>Skies of Arcadia</td>
+        <td>❌</td>
+        <td>16/09/2025 13:25:33</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>8</td>
+        <td>the legend of zelda</td>
+        <td>Skies of Arcadia</td>
+        <td>❌</td>
+        <td>16/09/2025 13:27:44</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>9</td>
+        <td>Paramore</td>
+        <td>Paramore</td>
+        <td>✅</td>
+        <td>16/09/2025 13:27:21</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>9</td>
+        <td>Avril Lavigne</td>
+        <td>Paramore</td>
+        <td>❌</td>
+        <td>16/09/2025 13:28:07</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>10</td>
+        <td>Pac Man</td>
+        <td>Inspecteur Gadget</td>
+        <td>❌</td>
+        <td>16/09/2025 13:28:18</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>10</td>
+        <td>Pac Man</td>
+        <td>Inspecteur Gadget</td>
+        <td>❌</td>
+        <td>16/09/2025 13:27:49</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>11</td>
+        <td>Ultra Vomit</td>
+        <td>Tagada Jones</td>
+        <td>❌</td>
+        <td>16/09/2025 13:28:08</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>11</td>
+        <td>Tagada Jones</td>
+        <td>Tagada Jones</td>
+        <td>✅</td>
+        <td>16/09/2025 13:29:05</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>12</td>
+        <td>Saint Asonia</td>
+        <td>Saint Asonia</td>
+        <td>✅</td>
+        <td>16/09/2025 13:28:21</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>12</td>
+        <td>Saint Asonia</td>
+        <td>Saint Asonia</td>
+        <td>✅</td>
+        <td>16/09/2025 13:29:58</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>13</td>
+        <td>Michael Youn</td>
+        <td>Bratisla Boys</td>
+        <td>❌</td>
+        <td>16/09/2025 13:31:30</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>13</td>
+        <td>Michael Youn</td>
+        <td>Bratisla Boys</td>
+        <td>❌</td>
+        <td>16/09/2025 13:29:04</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>14</td>
+        <td>Michael Youn</td>
+        <td>Grigori Rasputin</td>
+        <td>❌</td>
+        <td>16/09/2025 13:31:49</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>14</td>
+        <td>Grigori Rasputin</td>
+        <td>Grigori Rasputin</td>
+        <td>✅</td>
+        <td>16/09/2025 13:29:28</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>15</td>
+        <td>All Star</td>
+        <td>All Star</td>
+        <td>✅</td>
+        <td>16/09/2025 13:31:56</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>15</td>
+        <td>All Star</td>
+        <td>All Star</td>
+        <td>✅</td>
+        <td>16/09/2025 13:29:41</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>16</td>
+        <td>Renaud</td>
+        <td>Renaud</td>
+        <td>✅</td>
+        <td>16/09/2025 13:32:13</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>16</td>
+        <td>Renaud</td>
+        <td>Renaud</td>
+        <td>✅</td>
+        <td>16/09/2025 13:29:53</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>17</td>
+        <td>Sexion D'Assaut</td>
+        <td>Maitre Gims</td>
+        <td>❌</td>
+        <td>16/09/2025 13:32:27</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>17</td>
+        <td>Sexion D'Assaut</td>
+        <td>Maitre Gims</td>
+        <td>❌</td>
+        <td>16/09/2025 13:30:09</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>18</td>
+        <td>Tomber la chemise</td>
+        <td>Tomber la chemise</td>
+        <td>✅</td>
+        <td>16/09/2025 13:30:24</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>18</td>
+        <td>Tomber la chemise</td>
+        <td>Tomber la chemise</td>
+        <td>✅</td>
+        <td>16/09/2025 13:32:49</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>19</td>
+        <td>samurai</td>
+        <td>Las Ketchup</td>
+        <td>❌</td>
+        <td>16/09/2025 13:33:06</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>19</td>
+        <td>red hot chilli pepper</td>
+        <td>Las Ketchup</td>
+        <td>❌</td>
+        <td>16/09/2025 13:30:38</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>20</td>
+        <td>De cannibalisme</td>
+        <td>De cannibalisme</td>
+        <td>✅</td>
+        <td>16/09/2025 13:33:22</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>20</td>
+        <td>De cannibalisme</td>
+        <td>De cannibalisme</td>
+        <td>✅</td>
+        <td>16/09/2025 13:31:08</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>21</td>
+        <td>TAS</td>
+        <td>TAS</td>
+        <td>✅</td>
+        <td>16/09/2025 13:33:34</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>21</td>
+        <td>TAS</td>
+        <td>TAS</td>
+        <td>✅</td>
+        <td>16/09/2025 13:32:06</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>22</td>
+        <td>naggers</td>
+        <td>...Baby One More Time</td>
+        <td>❌</td>
+        <td>16/09/2025 13:32:37</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>22</td>
+        <td>julien lepers</td>
+        <td>...Baby One More Time</td>
+        <td>❌</td>
+        <td>16/09/2025 13:34:29</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>23</td>
+        <td>thriller</td>
+        <td>Beat It</td>
+        <td>❌</td>
+        <td>16/09/2025 13:33:37</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>23</td>
+        <td>beat it</td>
+        <td>Beat It</td>
+        <td>✅</td>
+        <td>16/09/2025 13:35:00</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>24</td>
+        <td>spider man</td>
+        <td>Die Hard</td>
+        <td>❌</td>
+        <td>16/09/2025 13:36:03</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>24</td>
+        <td>james bond</td>
+        <td>Die Hard</td>
+        <td>❌</td>
+        <td>16/09/2025 13:33:57</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>25</td>
+        <td>My Time</td>
+        <td>Still Alive</td>
+        <td>❌</td>
+        <td>16/09/2025 13:36:23</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>25</td>
+        <td>The Edge of Dawn</td>
+        <td>Still Alive</td>
+        <td>❌</td>
+        <td>16/09/2025 13:34:24</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>26</td>
+        <td>Overdose</td>
+        <td>De suicide par balle</td>
+        <td>❌</td>
+        <td>16/09/2025 13:36:45</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>26</td>
+        <td>De suicide par balle</td>
+        <td>De suicide par balle</td>
+        <td>✅</td>
+        <td>16/09/2025 13:34:33</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>27</td>
+        <td>The Onion Router</td>
+        <td>The Onion Router</td>
+        <td>✅</td>
+        <td>16/09/2025 13:34:39</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>27</td>
+        <td>Trick Or Ride</td>
+        <td>The Onion Router</td>
+        <td>❌</td>
+        <td>16/09/2025 13:36:55</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>28</td>
+        <td>Final Fanatsy VII</td>
+        <td>Gran Turismo</td>
+        <td>❌</td>
+        <td>16/09/2025 13:37:03</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>28</td>
+        <td>Final Fanatsy VII</td>
+        <td>Gran Turismo</td>
+        <td>❌</td>
+        <td>16/09/2025 13:34:49</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>29</td>
+        <td>un prêtre</td>
+        <td>l'arbre monde</td>
+        <td>❌</td>
+        <td>16/09/2025 13:37:24</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>29</td>
+        <td></td>
+        <td>l'arbre monde</td>
+        <td>❌</td>
+        <td>16/09/2025 13:35:36</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>30</td>
+        <td>PMA</td>
+        <td>PMA</td>
+        <td>✅</td>
+        <td>16/09/2025 13:37:07</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>30</td>
+        <td>Les 2</td>
+        <td>PMA</td>
+        <td>❌</td>
+        <td>16/09/2025 13:37:50</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>31</td>
+        <td>Les 2</td>
+        <td>Les 2</td>
+        <td>✅</td>
+        <td>16/09/2025 13:37:16</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>31</td>
+        <td>Les 2</td>
+        <td>Les 2</td>
+        <td>✅</td>
+        <td>16/09/2025 13:38:00</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>32</td>
+        <td>Les 2</td>
+        <td>PMU</td>
+        <td>❌</td>
+        <td>16/09/2025 13:38:09</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>32</td>
+        <td>PMU</td>
+        <td>PMU</td>
+        <td>✅</td>
+        <td>16/09/2025 13:37:20</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>33</td>
+        <td>Les 2</td>
+        <td>Moufle</td>
+        <td>❌</td>
+        <td>16/09/2025 13:38:41</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>33</td>
+        <td>Moufle</td>
+        <td>Moufle</td>
+        <td>✅</td>
+        <td>16/09/2025 13:37:40</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>34</td>
+        <td>Les 2</td>
+        <td>Les 2</td>
+        <td>✅</td>
+        <td>16/09/2025 13:37:44</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>34</td>
+        <td>Les 2</td>
+        <td>Les 2</td>
+        <td>✅</td>
+        <td>16/09/2025 13:38:50</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>35</td>
+        <td>Les 2</td>
+        <td>Les 2</td>
+        <td>✅</td>
+        <td>16/09/2025 13:38:59</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>35</td>
+        <td>Les 2</td>
+        <td>Les 2</td>
+        <td>✅</td>
+        <td>16/09/2025 13:38:00</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>36</td>
+        <td>Les 2</td>
+        <td>De Gaulle</td>
+        <td>❌</td>
+        <td>16/09/2025 13:38:07</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>36</td>
+        <td>Les 2</td>
+        <td>De Gaulle</td>
+        <td>❌</td>
+        <td>16/09/2025 13:39:06</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>37</td>
+        <td>Les 2</td>
+        <td>Les 2</td>
+        <td>✅</td>
+        <td>16/09/2025 13:38:17</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>37</td>
+        <td>Les 2</td>
+        <td>Les 2</td>
+        <td>✅</td>
+        <td>16/09/2025 13:39:26</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>38</td>
+        <td>Romantique</td>
+        <td>Les 2</td>
+        <td>❌</td>
+        <td>16/09/2025 13:39:39</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>38</td>
+        <td>Les 2</td>
+        <td>Les 2</td>
+        <td>✅</td>
+        <td>16/09/2025 13:38:24</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>39</td>
+        <td>Les 2</td>
+        <td>Romantique</td>
+        <td>❌</td>
+        <td>16/09/2025 13:38:55</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>39</td>
+        <td>Les 2</td>
+        <td>Romantique</td>
+        <td>❌</td>
+        <td>16/09/2025 13:39:47</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>40</td>
+        <td>Rome Antique</td>
+        <td>Rome Antique</td>
+        <td>✅</td>
+        <td>16/09/2025 13:39:06</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>40</td>
+        <td>Rome Antique</td>
+        <td>Rome Antique</td>
+        <td>✅</td>
+        <td>16/09/2025 13:40:08</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>41</td>
+        <td>Les 2</td>
+        <td>TV</td>
+        <td>❌</td>
+        <td>16/09/2025 13:40:22</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>41</td>
+        <td>Les 2</td>
+        <td>TV</td>
+        <td>❌</td>
+        <td>16/09/2025 13:39:32</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>42</td>
+        <td>YouPorn</td>
+        <td>YouPorn</td>
+        <td>✅</td>
+        <td>16/09/2025 13:39:43</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>42</td>
+        <td>Les 2</td>
+        <td>YouPorn</td>
+        <td>❌</td>
+        <td>16/09/2025 13:40:46</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>43</td>
+        <td>YouPorn</td>
+        <td>YouPorn</td>
+        <td>✅</td>
+        <td>16/09/2025 13:39:47</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>43</td>
+        <td>YouPorn</td>
+        <td>YouPorn</td>
+        <td>✅</td>
+        <td>16/09/2025 13:40:54</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>44</td>
+        <td>TV</td>
+        <td>TV</td>
+        <td>✅</td>
+        <td>16/09/2025 13:41:02</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>44</td>
+        <td>TV</td>
+        <td>TV</td>
+        <td>✅</td>
+        <td>16/09/2025 13:39:58</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>45</td>
+        <td>TV</td>
+        <td>YouPorn</td>
+        <td>❌</td>
+        <td>16/09/2025 13:40:05</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>45</td>
+        <td>Les 2</td>
+        <td>YouPorn</td>
+        <td>❌</td>
+        <td>16/09/2025 13:41:06</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>46</td>
+        <td>Les 2</td>
+        <td>Ca tue</td>
+        <td>❌</td>
+        <td>16/09/2025 13:41:14</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>46</td>
+        <td>Ca tue</td>
+        <td>Ca tue</td>
+        <td>✅</td>
+        <td>16/09/2025 13:40:16</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>47</td>
+        <td>Ha ouais... ça tue?</td>
+        <td>Ha ouais... ça tue?</td>
+        <td>✅</td>
+        <td>16/09/2025 13:41:24</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>47</td>
+        <td>Ca tue</td>
+        <td>Ha ouais... ça tue?</td>
+        <td>❌</td>
+        <td>16/09/2025 13:40:53</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>48</td>
+        <td>Les 2</td>
+        <td>Ca tue</td>
+        <td>❌</td>
+        <td>16/09/2025 13:41:32</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>48</td>
+        <td>Ca tue</td>
+        <td>Ca tue</td>
+        <td>✅</td>
+        <td>16/09/2025 13:40:59</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>49</td>
+        <td>Ca tue</td>
+        <td>Ca tue,Ha ouais... ça tue?,Les 2</td>
+        <td>✅</td>
+        <td>16/09/2025 13:41:18</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>49</td>
+        <td>Ha ouais... ça tue?</td>
+        <td>Ca tue,Ha ouais... ça tue?,Les 2</td>
+        <td>✅</td>
+        <td>16/09/2025 13:41:39</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>50</td>
+        <td>Ca tue</td>
+        <td>Ca tue</td>
+        <td>✅</td>
+        <td>16/09/2025 13:41:23</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>50</td>
+        <td>Ca tue</td>
+        <td>Ca tue</td>
+        <td>✅</td>
+        <td>16/09/2025 13:41:47</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>51</td>
+        <td>Les 2</td>
+        <td>Ha ouais... ça tue?</td>
+        <td>❌</td>
+        <td>16/09/2025 13:41:31</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>51</td>
+        <td>Les 2</td>
+        <td>Ha ouais... ça tue?</td>
+        <td>❌</td>
+        <td>16/09/2025 13:41:51</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>52</td>
+        <td>Ha ouais... ça tue?</td>
+        <td>Ha ouais... ça tue?</td>
+        <td>✅</td>
+        <td>16/09/2025 13:42:00</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>52</td>
+        <td>Ha ouais... ça tue?</td>
+        <td>Ha ouais... ça tue?</td>
+        <td>✅</td>
+        <td>16/09/2025 13:41:40</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>53</td>
+        <td>Ca tue</td>
+        <td>Ca tue</td>
+        <td>✅</td>
+        <td>16/09/2025 13:42:04</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>53</td>
+        <td>Ca tue</td>
+        <td>Ca tue</td>
+        <td>✅</td>
+        <td>16/09/2025 13:41:44</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>54</td>
+        <td>Saturne?</td>
+        <td>Saturne?</td>
+        <td>✅</td>
+        <td>16/09/2025 13:42:09</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>54</td>
+        <td>Saturne?</td>
+        <td>Saturne?</td>
+        <td>✅</td>
+        <td>16/09/2025 13:41:48</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>55</td>
+        <td>Huge Cock</td>
+        <td>Les 2</td>
+        <td>❌</td>
+        <td>16/09/2025 13:41:59</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>55</td>
+        <td>Les 2</td>
+        <td>Les 2</td>
+        <td>✅</td>
+        <td>16/09/2025 13:42:19</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>56</td>
+        <td>Les 2</td>
+        <td>Les 2</td>
+        <td>✅</td>
+        <td>16/09/2025 13:42:30</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>56</td>
+        <td>Hitchcock</td>
+        <td>Les 2</td>
+        <td>❌</td>
+        <td>16/09/2025 13:42:06</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>57</td>
+        <td>Hitchcock</td>
+        <td>Hitchcock</td>
+        <td>✅</td>
+        <td>16/09/2025 13:42:38</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>57</td>
+        <td>Les 2</td>
+        <td>Hitchcock</td>
+        <td>❌</td>
+        <td>16/09/2025 13:42:16</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>58</td>
+        <td>Les 2</td>
+        <td>Les 2</td>
+        <td>✅</td>
+        <td>16/09/2025 13:43:17</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>58</td>
+        <td>Les 2</td>
+        <td>Les 2</td>
+        <td>✅</td>
+        <td>16/09/2025 13:42:22</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>59</td>
+        <td>Les 2</td>
+        <td>Hitchcock</td>
+        <td>❌</td>
+        <td>16/09/2025 13:43:26</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>59</td>
+        <td>Les 2</td>
+        <td>Hitchcock</td>
+        <td>❌</td>
+        <td>16/09/2025 13:42:25</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>60</td>
+        <td>Insecte</td>
+        <td>Les 2</td>
+        <td>❌</td>
+        <td>16/09/2025 13:43:15</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>60</td>
+        <td>Les 2</td>
+        <td>Les 2</td>
+        <td>✅</td>
+        <td>16/09/2025 13:43:45</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>61</td>
+        <td>Les 2</td>
+        <td>Les 2</td>
+        <td>✅</td>
+        <td>16/09/2025 13:43:35</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>61</td>
+        <td>Les 2</td>
+        <td>Les 2</td>
+        <td>✅</td>
+        <td>16/09/2025 13:44:12</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>62</td>
+        <td>Une Secte</td>
+        <td>Une Secte</td>
+        <td>✅</td>
+        <td>16/09/2025 13:44:16</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>62</td>
+        <td>Les 2</td>
+        <td>Une Secte</td>
+        <td>❌</td>
+        <td>16/09/2025 13:43:40</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>63</td>
+        <td>Les 2</td>
+        <td>Insecte</td>
+        <td>❌</td>
+        <td>16/09/2025 13:43:44</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>63</td>
+        <td>Les 2</td>
+        <td>Insecte</td>
+        <td>❌</td>
+        <td>16/09/2025 13:44:20</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>64</td>
+        <td>Une Secte</td>
+        <td>Une Secte</td>
+        <td>✅</td>
+        <td>16/09/2025 13:44:25</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>64</td>
+        <td>Les 2</td>
+        <td>Une Secte</td>
+        <td>❌</td>
+        <td>16/09/2025 13:44:44</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>65</td>
+        <td>Moktar</td>
+        <td>Moktar</td>
+        <td>✅</td>
+        <td>16/09/2025 13:45:27</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>65</td>
+        <td>Amed</td>
+        <td>Moktar</td>
+        <td>❌</td>
+        <td>16/09/2025 13:44:31</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>66</td>
+        <td>Faux</td>
+        <td>Faux</td>
+        <td>✅</td>
+        <td>16/09/2025 13:45:37</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>66</td>
+        <td>Faux</td>
+        <td>Faux</td>
+        <td>✅</td>
+        <td>16/09/2025 13:44:40</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>67</td>
+        <td>Faux</td>
+        <td>Faux</td>
+        <td>✅</td>
+        <td>16/09/2025 13:46:01</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>67</td>
+        <td>Faux</td>
+        <td>Faux</td>
+        <td>✅</td>
+        <td>16/09/2025 13:44:53</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>68</td>
+        <td>Vrai</td>
+        <td>Vrai,Faux</td>
+        <td>✅</td>
+        <td>16/09/2025 13:46:01</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>68</td>
+        <td>Vrai</td>
+        <td>Vrai,Faux</td>
+        <td>✅</td>
+        <td>16/09/2025 13:44:59</td>
+      </tr><tr>
+        <td>Hugo</td>
+        <td>69</td>
+        <td>Vrai</td>
+        <td>Vrai,Faux</td>
+        <td>✅</td>
+        <td>16/09/2025 13:45:04</td>
+      </tr><tr>
+        <td>Je M'appelle Teuse</td>
+        <td>69</td>
+        <td>Vrai</td>
+        <td>Vrai,Faux</td>
+        <td>✅</td>
+        <td>16/09/2025 13:46:05</td>
+      </tr></tbody>
+    </table>
+  </div>
+
+  <!-- Firebase Compat SDK -->
+  <script src="./Vos_reponses_files/firebase-app-compat.js.téléchargement"></script>
+  <script src="./Vos_reponses_files/firebase-firestore-compat.js.téléchargement"></script>
+
+  <script>
+    let unsubscribeShowContent = null;
+    let filtreQuestion = "all";
+    let modeAffichage = "participant"; // 'participant' ou 'toutes'
+    function appliquerFiltreQuestion() {
+  filtreQuestion = document.getElementById("filtreQuestion").value;
+
+    if (modeAffichage === "participant") {
+  // Recharge l'onglet actif avec le nouveau filtre
+  const activeTab = document.querySelector('#tabs button.active');
+  if (activeTab) {
+      showContent(activeTab.textContent);
+    }
+} else if (modeAffichage === "toutes") {
+    showAllResponses();
+  }
+}
+    // 🔧 Configuration Firebase (la même que dans quiz.html)
+  const firebaseConfig = {
+      apiKey: "AIzaSyDNf6qrVBkrHyUM0SRqJ8UbkxAIh7-lErU",
+      authDomain: "test-fe2c7.firebaseapp.com",
+      databaseURL: "https://test-fe2c7-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "test-fe2c7",
+      storageBucket: "test-fe2c7.firebasestorage.app",
+      messagingSenderId: "939201608583",
+      appId: "1:939201608583:web:f15a2483910ee8c77fb122"
+  };
+
+  // 🔥 Initialisation Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+function resetReponses() {
+  if (!confirm("⚠️ Êtes-vous sûr de vouloir supprimer toutes les réponses ? Cette action est irréversible.")) {
+    return;
+  }
+
+  db.collection("reponsesQuiz")
+    .get()
+    .then(snapshot => {
+      const batch = db.batch(); // Crée une opération groupée
+      snapshot.forEach(doc => {
+        batch.delete(doc.ref); // Marque chaque doc pour suppression
+      });
+      return batch.commit(); // Exécute toutes les suppressions
+    })
+    .then(() => {
+      alert("✅ Toutes les réponses ont été supprimées.");
+      // Vide aussi l'affichage à l'écran
+      document.getElementById('content').innerHTML = '';
+      document.getElementById('filteredResults').innerHTML = '';
+      document.getElementById('tabs').innerHTML = '';
+    })
+}
+
+  // Maintenant que db est défini, tu peux faire ta requête :
+db.collection("reponsesQuiz").onSnapshot(
+  snapshot => {
+    const participantsSet = new Set();
+    snapshot.forEach(doc => {
+      const participant = doc.data().participant;
+      if (participant) {
+        participantsSet.add(participant);
+      }
+    });
+    const participants = Array.from(participantsSet);
+    createTabs(participants);
+  },
+  error => {
+    console.error("Erreur récupération participants :", error);
+  }
+);
+
+
+function changerFiltreQuestion() {
+  filtreQuestion = document.getElementById("filtreQuestion").value;
+
+  // Recharge onglet actif (réponses joueur filtrées)
+  const activeTab = document.querySelector('#tabs button.active');
+  if (activeTab) {
+    showContent(activeTab.textContent);
+  }
+}
+  </script>
+
+<label for="filtreQuestion">Filtrer par question :</label>
+<select id="filtreQuestion" onchange="changerFiltreQuestion()">
+  <option value="all">Toutes les questions</option>
+  <option value="1">Question 1</option>
+  <option value="2">Question 2</option>
+  <option value="3">Question 3</option>
+  <option value="4">Question 4</option>
+  <option value="5">Question 5</option>
+  <option value="6">Question 6</option>
+  <option value="7">Question 7</option>
+  <option value="8">Question 8</option>
+  <option value="9">Question 9</option>
+  <option value="10">Question 10</option>
+  <option value="11">Question 11</option>
+  <option value="12">Question 12</option>
+  <option value="13">Question 13</option>
+  <option value="14">Question 14</option>
+  <option value="15">Question 15</option>
+  <option value="16">Question 16</option>
+  <option value="17">Question 17</option>
+  <option value="18">Question 18</option>
+  <option value="19">Question 19</option>
+  <option value="20">Question 20</option>
+  <option value="21">Question 21</option>
+  <option value="22">Question 22</option>
+  <option value="23">Question 23</option>
+  <option value="24">Question 24</option>
+  <option value="25">Question 25</option>
+  <option value="26">Question 26</option>
+  <option value="27">Question 27</option>
+  <option value="28">Question 28</option>
+  <option value="29">Question 29</option>
+  <option value="30">Question 30</option>
+  <option value="31">Question 31</option>
+  <option value="32">Question 32</option>
+  <option value="33">Question 33</option>
+  <option value="34">Question 34</option>
+  <option value="35">Question 35</option>
+  <option value="36">Question 36</option>
+  <option value="37">Question 37</option>
+  <option value="38">Question 38</option>
+  <option value="39">Question 39</option>
+  <option value="40">Question 40</option>
+  <option value="41">Question 41</option>
+  <option value="42">Question 42</option>
+  <option value="43">Question 43</option>
+  <option value="44">Question 44</option>
+  <option value="45">Question 45</option>
+  <option value="46">Question 46</option>
+  <option value="47">Question 47</option>
+  <option value="48">Question 48</option>
+  <option value="49">Question 49</option>
+  <option value="50">Question 50</option>
+  <option value="51">Question 51</option>
+  <option value="52">Question 52</option>
+  <option value="53">Question 53</option>
+  <option value="54">Question 54</option>
+  <option value="55">Question 55</option>
+  <option value="56">Question 56</option>
+  <option value="57">Question 57</option>
+  <option value="58">Question 58</option>
+  <option value="59">Question 59</option>
+  <option value="60">Question 60</option>
+  <option value="61">Question 61</option>
+  <option value="62">Question 62</option>
+  <option value="63">Question 63</option>
+  <option value="64">Question 64</option>
+  <option value="65">Question 65</option>
+  <option value="66">Question 66</option>
+  <option value="67">Question 67</option>
+  <option value="68">Question 68</option>
+  <option value="69">Question 69</option>
+</select>
+<!--Reset résultats-->
+<button onclick="resetReponses()">❌ Supprimer toutes les réponses</button>
+
+<div id="tabs-container" style="display: flex; align-items: center; gap: 10px; margin-top: 20px;">
+  <div id="tabs" style="flex-grow: 1;"></div>
+  <button id="btnAllResponses" onclick="showAllResponses()" style="padding: 5px 10px; cursor: pointer;">Valider</button>
+</div>
+
+<div id="totauxParParticipant" style="font-weight: bold; margin-top: 15px;"><strong>Totaux par participant :</strong><br>Je M'appelle Teuse : 40 point(s)<br>Hugo : 35 point(s)<br></div>
+
+<div id="filteredResults"></div>
+
+<script>
+function showAllResponses() {
+  const filteredResults = document.getElementById("filteredResults");
+  filteredResults.innerHTML = `
+    <table style="width: 100%; border-collapse: collapse;">
+      <thead>
+        <tr>
+          <th>Participant</th>
+          <th>Question</th>
+          <th>Réponse donnée</th>
+          <th>Bonne réponse</th>
+          <th>Correcte</th>
+          <th>Timestamp</th>
+        </tr>
+      </thead>
+      <tbody id="responseBody"></tbody>
+    </table>
+  `;
+
+  const responseBody = document.getElementById('responseBody');
+  const totalDiv = document.getElementById('totauxParParticipant');
+  totalDiv.innerHTML = "";
+
+  let query = firebase.firestore().collection("reponsesQuiz");
+
+  if (filtreQuestion !== "all") {
+    query = query.where("question", "==", Number(filtreQuestion));
+  }
+
+  query = query.orderBy("question");
+
+  query.onSnapshot(snapshot => {
+    responseBody.innerHTML = "";
+    totalDiv.innerHTML = "";
+
+    if (snapshot.empty) {
+      responseBody.innerHTML = `<tr><td colspan="6" style="text-align:center;">Aucune réponse trouvée pour ce filtre.</td></tr>`;
+      totalDiv.textContent = "Total général des points : 0";
+      return;
+    }
+
+    const pointsParParticipant = {};
+
+    snapshot.forEach(doc => {
+      const data = doc.data();
+
+      if (!pointsParParticipant[data.participant]) {
+        pointsParParticipant[data.participant] = 0;
+      }
+      if (data.correcte) pointsParParticipant[data.participant]++;
+
+      const date = data.timestamp?.toDate ? data.timestamp.toDate() : new Date();
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${data.participant ?? "-"}</td>
+        <td>${data.question ?? "-"}</td>
+        <td>${data.reponseDonnee ?? "-"}</td>
+        <td>${data.bonneReponse ?? "-"}</td>
+        <td>${data.correcte ? "✅" : "❌"}</td>
+        <td>${date.toLocaleString()}</td>
+      `;
+      responseBody.appendChild(tr);
+    });
+
+totalDiv.innerHTML = "<strong>Totaux par participant :</strong><br>";
+
+// Transformer en tableau [ [participant, points], ... ]
+const sortedEntries = Object.entries(pointsParParticipant)
+  .sort((a, b) => b[1] - a[1]); // tri décroissant sur les points
+
+// Réinsérer dans l'ordre
+for (const [participant, points] of sortedEntries) {
+  totalDiv.innerHTML += `${participant} : ${points} point(s)<br>`;
+}  }, error => {
+    console.error("Erreur onSnapshot (showAllResponses) :", error);
+    responseBody.innerHTML = `<tr><td colspan="6" style="text-align:center;">Erreur lors de la récupération des réponses.</td></tr>`;
+    totalDiv.textContent = "";
+  });
+}
+</script>
+
+</body></html>

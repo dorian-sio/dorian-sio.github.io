@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Résultats Smash or Pass</title>
+  <link rel="stylesheet" href="SOM.css">
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 15px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Résultats Smash or Pass</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Joueur</th>
+        <th>Smash ❤️</th>
+        <th>Pass ❌</th>
+        <th>% Smash</th> <!-- Nouvelle colonne -->
+        <th>Détails des votes</th>
+      </tr>
+    </thead>
+    <tbody id="resultsBody"></tbody>
+  </table>
+
+  <button onclick="resetVotes()">Réinitialiser les résultats</button>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyB0qY_bqgkxNYBfTZ1q5a_QgGDkAPAFWa4",
+      authDomain: "smash-or-pass-b13da.firebaseapp.com",
+      databaseURL: "https://smash-or-pass-b13da-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "smash-or-pass-b13da",
+      storageBucket: "smash-or-pass-b13da.appspot.com",
+      messagingSenderId: "1057988334752",
+      appId: "1:1057988334752:web:5c078e6077d375a65a25c5",
+      measurementId: "G-JVPWEMJLS4"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    const tbody = document.getElementById("resultsBody");
+
+    function afficherResultats(votesData) {
+      tbody.innerHTML = "";
+
+      const votes = Object.values(votesData || {});
+
+      // Grouper par joueur
+      const joueurs = {};
+      votes.forEach(v => {
+        if (!joueurs[v.joueur]) joueurs[v.joueur] = [];
+        joueurs[v.joueur].push(v);
+      });
+
+      Object.keys(joueurs).forEach(joueur => {
+        const votesJoueur = joueurs[joueur];
+        const smash = votesJoueur.filter(v => v.vote === "smash").length;
+        const pass = votesJoueur.filter(v => v.vote === "pass").length;
+        const total = smash + pass;
+        const pourcentageSmash = total > 0 ? ((smash / total) * 100).toFixed(1) + "%" : "-";
+
+        const details = votesJoueur.map(v => `${v.nom}: ${v.vote}`).join("<br>");
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${joueur}</td>
+          <td>${smash}</td>
+          <td>${pass}</td>
+          <td>${pourcentageSmash}</td> <!-- Colonne % -->
+          <td>${details}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Écoute en temps réel des votes
+    db.ref("votes").on("value", snapshot => {
+      afficherResultats(snapshot.val());
+    });
+
+    function resetVotes() {
+      if(confirm("⚠️ Voulez-vous vraiment réinitialiser tous les votes ?")) {
+        db.ref("votes").remove()
+          .then(() => alert("✅ Votes réinitialisés !"))
+          .catch(err => console.error(err));
+      }
+    }
+  </script>
+</body>
+</html>

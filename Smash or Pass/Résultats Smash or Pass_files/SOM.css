@@ -1,0 +1,16 @@
+body { font-family: Arial; text-align:center; padding:50px; color: rgb(235, 13, 13);
+      background-image: url(images/background.jpg);
+      background-size: cover;       /* L'image couvre toute la page */
+      background-repeat: no-repeat; /* Pas de répétition */
+      background-attachment: fixed; /* L'image reste fixe au scroll */
+      background-position: center;  /* Centrée */ }
+      
+img { width:200px; height:auto; margin-bottom:20px; }
+button { padding:10px 20px; margin:10px; font-size:16px; cursor:pointer; }
+
+.perso {
+  width: 1000px;      /* ou la taille que tu veux */
+  height: auto;      /* garde les proportions */
+  display: block;    /* nécessaire pour centrer */
+  margin: 20px auto; /* centre horizontalement */
+}

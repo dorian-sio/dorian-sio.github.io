@@ -1,0 +1,61 @@
+Dans Quizz.html
+
+Ajouter la couple Q/R
+
+<!-- Question 3 -->
+  <div class="question" id="question3">
+    <p>3. Combien font 3 + 3 ?</p>
+    <input type="radio" name="q3" value="6"> 6<br>
+    <input type="radio" name="q3" value="7"> 7<br>
+    <input type="radio" name="q3" value="8"> 8<br>
+    <br>
+    <button onclick="verifierReponse(3, '6')">Vérifier la réponse</button>
+  </div>
+
+  <!-- Résultat Question 3 -->
+  <div class="question" id="feedback3">
+    <p id="feedback3Message" class="feedback"></p>
+    <button onclick="suivant(3)">Suivant</button>
+  </div>
+
+document.getElementById("score").textContent = `Votre score : ${score} / 2`;
+
+Mettre le nombre de question total après le /
+
+
+// Fonction pour passer à la question suivante ou afficher le score final
+    function suivant(numero){
+        // Liste des sauts spéciaux (page explicative, etc.)
+        const prochainBloc = {
+29: 'explication',
+          'explication': 30,
+30: 'explication',
+	  'ex	
+          31: 'resultat' // mets ici le numéro de ta dernière question
+        };
+
+
+Document.getElementById("score").textContent = `Votre score : ${score} / 31
+
+Dans Reponses.html
+
+<label for="filtreQuestion">Filtrer par question :</label>
+<select id="filtreQuestion" onchange="changerFiltreQuestion()">
+  <option value="all">Toutes les questions</option>
+  <option value="1">Question 1</option>
+  <option value="2">Question 2</option>
+  <option value="3">Question 3</option>
+
+Ajouter une option par question
+
+
+
+
+
+
+Il n'y a plus : 
+
+// Si c'est la dernière question, montre le résultat final
+      if (numero === 3) {
+
+Changer numero === x pour mettre le nombre de questions à la place de x

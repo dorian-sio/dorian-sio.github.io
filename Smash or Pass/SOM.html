@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Smash or Pass</title>
+  <link rel="stylesheet" href="SOM.css"/>
+</head>
+<body>
+  <h1>Smash or Pass</h1>
+
+  <!-- Saisie du nom -->
+  <div id="login">
+    <label for="nom">Entrez votre nom :</label>
+    <input type="text" id="nom" placeholder="Mets un nom ou j'te baise" />
+    <button onclick="commencer()">Commencer</button>
+    <p>Règles : </p>
+    <p>Etre honnête</p>
+    <p>S'attendre</p>
+    <p>On prends toujours pas l'âge en compte</p>
+    <p>(Ca veut dire qu'il y aura des mineurs)</p>
+  </div>
+
+  <!-- Bloc perso -->
+  <div id="perso-container" style="display:none;">
+    <img id="persoImage" class="perso" src="" alt="Personnage">
+    <h2 id="persoNom"></h2>
+    <button onclick="voter('smash')">Smash ❤️</button>
+    <button onclick="voter('pass')">Pass ❌</button>
+  </div>
+
+  <!-- Bloc commentaire -->
+  <div id="commentaire-container" style="display:none;">
+    <h3>Mon avis :</h3>
+    <p id="commentaireTexte"></p>
+    <button onclick="suivant()">Continuer</button>
+  </div>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+
+  <script>
+    // 🔧 Config Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyB0qY_bqgkxNYBfTZ1q5a_QgGDkAPAFWa4",
+      authDomain: "smash-or-pass-b13da.firebaseapp.com",
+      databaseURL: "https://smash-or-pass-b13da-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "smash-or-pass-b13da",
+      storageBucket: "smash-or-pass-b13da.appspot.com",
+      messagingSenderId: "1057988334752",
+      appId: "1:1057988334752:web:5c078e6077d375a65a25c5",
+      measurementId: "G-JVPWEMJLS4"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // Liste des persos avec commentaire (ton avis)
+    const personnages = [
+      { nom: "Nains", image: "images/Nains.jpg", commentaire: "La blague c'est qu'ils vont à la mine. Donc c'est des mineurs... LOL" },
+      { nom: "Gardevoir", image: "./images/Gardevoir.png", commentaire: "Smash à fond" },
+      { nom: "L'extraterrestre", image: "./images/extraterrestre.jpg", commentaire: "Pass" },
+      { nom: "Le marchand de sable", image: "./images/marchand.jpg", commentaire: "Pass" },
+      { nom: "Sailor Moon", image: "./images/sailor_moon.jpg", commentaire: "En vrai, elle est trop belle" },
+      { nom: "Sailor Neptune", image: "./images/Sailor_Neptune.jpg", commentaire: "J'ai vraiment besoin de justifier?" },
+      { nom: "Sailor Jupiter", image: "./images/sailor_jupiter.jpg", commentaire: "Smash" },
+      { nom: "Sailor Mars", image: "./images/Sailor_Mars.jpg", commentaire: "Smash" },
+      { nom: "Sailor Mercury", image: "./images/Sailor_Mercury.jpg", commentaire: "Pass" },
+      { nom: "Sailor Pluto", image: "./images/Sailor_Pluton.jpg", commentaire: "Smash" },
+      { nom: "Sailor Uranus", image: "./images/Sailor_Uranus.jpg", commentaire: "Pass" },
+      { nom: "Sailor Venus", image: "./images/Sailor_Venus.jpg", commentaire: "Trop belle, smash" },
+      { nom: "Sonic", image: "./images/sonic.jpg", commentaire: "Pass" },
+      { nom: "Sonic ta mère", image: "./images/Sonic_tamere.jpg", commentaire: "Smash (pour ta mère)" },
+      { nom: "Athéna", image: "./images/Athena.jpg", commentaire: "Smash, magnifique" },
+      { nom: "Aubrey", image: "./images/Aubrey.jpg", commentaire: "Smash" },
+      { nom: "Mari", image: "./images/Mari.jpg", commentaire: "Smash parce que je savais pas quoi répondre" },
+      { nom: "Ellie", image: "./images/Ellie.jpg", commentaire: "Pass" },
+      { nom: "Sylvia", image: "./images/Cats_Eyes_Sylia.jpg", commentaire: "Smash" },
+      { nom: "Tam", image: "./images/Cats_Eyes_Tam.jpg", commentaire: "Smash" },
+      { nom: "Carapuce", image: "./images/carapuce.jpg", commentaire: "Pass" },
+      { nom: "Tortank", image: "./images/tortank.jpg", commentaire: "Smash" },
+      { nom: "Nidoran Femelle", image: "./images/Nidoran.jpg", commentaire: "Pass" },
+      { nom: "Nidoqueen", image: "./images/nidoqueen.jpg", commentaire: "Smash" },
+      { nom: "Feunard", image: "./images/feunard.jpg", commentaire: "Smash, il a une belle prestance" },
+      { nom: "Rondoudou", image: "./images/rondoudou.jpg", commentaire: "Smash, il peut me gober... littéralement" },
+      { nom: "Mackogneur", image: "./images/mackogneur.jpg", commentaire: "Pass, mais il peut quand même te branler de pusieurs mains" },
+      { nom: "Chetiflor", image: "./images/chetiflor.jpg", commentaire: "Smash" },
+      { nom: "Ponyta", image: "./images/ponyta.jpg", commentaire: "Pass" },
+      { nom: "Crustabri", image: "./images/crustabri.jpg", commentaire: "Smash, c'est un vagin" },
+      { nom: "M. Mime", image: "./images/mrmime.jpg", commentaire: "Pass" },
+      { nom: "Lippoutou", image: "./images/lippoutou.jpg", commentaire: "Pass" },
+      { nom: "Métamorph", image: "./images/Métamorph.jpg", commentaire: "Smash, Il peut littéralement être tout ce que tu veux" },
+      { nom: "Evoli", image: "./images/evoli.jpg", commentaire: "Pass" },
+      { nom: "Aquali", image: "./images/aquali.jpg", commentaire: "Smash" },
+      { nom: "Voltali", image: "./images/voltali.jpg", commentaire: "Pass" },
+      { nom: "Pyroli", image: "./images/pyroli.jpg", commentaire: "Pass" },
+      { nom: "Mentali", image: "./images/mentali.jpg", commentaire: "Pass" },
+      { nom: "Noctali", image: "./images/noctali.jpg", commentaire: "Pass" },
+      { nom: "Phtllali", image: "./images/phyllali.jpg", commentaire: "Smash" },
+      { nom: "Givrali", image: "./images/Givrali.jpg", commentaire: "Smash" },
+      { nom: "Zarbi A", image: "./images/A.jpg", commentaire: "Y a un trou en fait" },
+      { nom: "Zarbi I", image: "./images/I.jpg", commentaire: "Y a pas de trou en fait" },
+      { nom: "Ecremeuh", image: "./images/ecremeuh.jpg", commentaire: "Smash, y a des mamelons" },
+      { nom: "Stalgamin", image: "./images/stalgamin.jpg", commentaire: "T'imagine tu t'asseois dessus et t'attends?..... Enfin bref" },
+      { nom: "Roserade", image: "./images/roserade.jpg", commentaire: "Pass" },
+      { nom: "Apitrini", image: "./images/apitrini.jpg", commentaire: "Y a plusieurs trous" },
+      { nom: "Lockpin", image: "./images/lockpin.jpg", commentaire: "NIIIIIIIIIIIICHONNNNNNNNNNNNNNS. Non, en vrai c'est juste ses coudes donc pass" },
+      { nom: "Gallame", image: "./images/gallame.jpg", commentaire: "Pass" },
+      { nom: "Fragilady", image: "./images/Fragilady.jpg", commentaire: "C'est juste une endive" },
+      { nom: "Roussil", image: "./images/roussil.jpg", commentaire: "Pass" },
+      { nom: "Zelda", image: "./images/Zelda.jpg", commentaire: "Ho la la ce qu'elle se prends elle" },
+      { nom: "Peach", image: "./images/peach.jpg", commentaire: "Non" },
+      { nom: "Pauline", image: "./images/pauline.jpg", commentaire: "Bof" },
+      { nom: "Harmonie", image: "./images/Harmonie.jpg", commentaire: "Je kiffe Harmonie" },
+      { nom: "Aerith", image: "./images/Aerith.jpg", commentaire: "Ho smash" },
+      { nom: "Tifa", image: "./images/Tifa.jpg", commentaire: "Smash" },
+      { nom: "Linoa", image: "./images/Linoa.jpg", commentaire: "Smash aussi" },
+      { nom: "Selphie", image: "./images/Selphie.jpg", commentaire: "Je sais pas donc smash par défaut" },
+      { nom: "Dagga", image: "./images/Dagga.jpg", commentaire: "Smash" },
+      { nom: "Eiko", image: "./images/Eiko.jpg", commentaire: "Pass" },
+      { nom: "Kweena", image: "./images/Kweena.jpg", commentaire: "Pass..... mais en même temps j'aime bien manger" },
+      { nom: "Beatrix", image: "./images/Beatrix.jpg", commentaire: "Bon OK là c'est une figurine, mais j'ai pas trouvé de photo avec son épée. Smash" },
+      { nom: "Yuna", image: "./images/Yuna.jpg", commentaire: "MA FEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEMME" },
+      { nom: "Lulu", image: "./images/Lulu.jpg", commentaire: "Pass" },
+      { nom: "Rikku", image: "./images/Rikku.jpg", commentaire: "Smash" },
+      { nom: "Paine", image: "./images/Paine.jpg", commentaire: "Pass, En plus elle sert à rien dans ce jeu de MEEEEEEEEEERDE" },
+      { nom: "Penelo", image: "./images/Penelo.jpg", commentaire: "Pass" },
+      { nom: "Ashe", image: "./images/Ashe.jpg", commentaire: "Smash" },
+      { nom: "Fran", image: "./images/Fran.jpg", commentaire: "Désolé... Smash" },
+      { nom: "Lightning", image: "./images/Light.jpg", commentaire: "Smash" },
+      { nom: "Vanille", image: "./images/Vanille.jpg", commentaire: "Smash" },
+      { nom: "Fang", image: "images/fang.png", commentaire: "C'est littéralement un de mes fond d'écran" },
+      { nom: "Serah", image: "images/Serah.jpg", commentaire: "Smash" },
+      { nom: "Lunafreya", image: "images/Luna.jpg", commentaire: "Smash" },
+      { nom: "Cindy", image: "images/Cindy.jpg", commentaire: "Je préshot un smash d'Enzo" },
+      { nom: "Iris", image: "images/Iris.jpg", commentaire: "On a dit que l'âge rentrait pas en compte" },
+      { nom: "Jill", image: "images/Jill.jpg", commentaire: "J'ai peut-être regardé plus de photos que nécéssaires pour trouver celle-la" },
+      { nom: "Benedikta", image: "images/Benedikta.jpg", commentaire: "Smash" },
+      { nom: "Anabella", image: "images/Anabella.jpg", commentaire: "Smash" },
+      { nom: "Vivian", image: "images/Vivian.jpg", commentaire: "Elle ne m'est pas indifférente" },
+      { nom: "Mid", image: "images/Mid.jpg", commentaire: "On a dit on juge pas sur l'âge" },
+      { nom: "Marisa", image: "images/Marisa.jpg", commentaire: "Pass" },
+      { nom: "Reimu", image: "images/Reimu.jpg", commentaire: "Smash" },
+      { nom: "Kyoko Kirigiri", image: "images/Kyoko.jpg", commentaire: "Smash" },
+      { nom: "Toko Fukawa", image: "images/Toko.jpg", commentaire: "Pass" },
+      { nom: "Sho la génocidarie", image: "images/Sho.jpg", commentaire: "Smash" },
+      { nom: "Aio Asahina", image: "images/Aoi.jpg", commentaire: "Smash" },
+      { nom: "Sayaka Maizono", image: "images/Sayaka.jpg", commentaire: "Smash" },
+      { nom: "Celestia Ludenberg", image: "images/Celeste.jpg", commentaire: "Smash" },
+      { nom: "Sakura Ogami", image: "images/Sakura.jpg", commentaire: "Pass" },
+      { nom: "Junko Enoshima", image: "images/Junko.jpg", commentaire: "Smash" },
+      { nom: "Mukuro Ikusaba", image: "images/Mukuro.jpg", commentaire: "Smash" },
+      { nom: "Chiaki Nanami", image: "images/Chiaki.jpg", commentaire: "Smash" },
+      { nom: "Akane Owari", image: "images/Akane.jpg", commentaire: "Pass" },
+      { nom: "Sonia Nevermind", image: "images/Sonia.jpg", commentaire: "Smash, d'ailleurs, c'est totalement une référence au groupe Nirvana" },
+      { nom: "Mahiru Koizumi", image: "images/Mahiru.jpg", commentaire: "Pass" },
+      { nom: "Peko Pekoyama", image: "images/Peko.jpg", commentaire: "Smash" },
+      { nom: "Ibuki Mioda", image: "images/Ibuki.jpg", commentaire: "Smash" },
+      { nom: "Hiyoko Saionji", image: "images/Hiyoko.jpg", commentaire: "Pass" },
+      { nom: "Mikan Tsumiki", image: "images/Mikan.jpg", commentaire: "Smash" },
+      { nom: "Monomi", image: "images/Monomi.jpg", commentaire: "Pass" },
+      { nom: "Komaru Naegi", image: "images/Komaru.jpg", commentaire: "Smash" },
+      { nom: "Monaca Towa", image: "images/Monaca.jpg", commentaire: "Pass" },
+      { nom: "Kotoko Utsugi", image: "images/Kotoko.jpg", commentaire: "Smash" },
+      { nom: "Hiroko Hagakure", image: "images/Hiroko.jpg", commentaire: "Smash" },
+      { nom: "Chisa Yukizome", image: "images/Chisa.jpg", commentaire: "Smash" },
+      { nom: "Seiko Kimura", image: "images/Seiko.jpg", commentaire: "Pass" },
+      { nom: "Ruruka Ando", image: "images/Ruruka.jpg", commentaire: "Pass" },
+      { nom: "Kaede Akamatsu", image: "images/Kaede.jpg", commentaire: "SMASH, En plus elle joue du piano" },
+      { nom: "Maki Harukawa", image: "images/Maki.jpg", commentaire: "Smash" },
+      { nom: "Himiko Yumeno", image: "images/Himiko.jpg", commentaire: "Pass" },
+      { nom: "Kirumi Tojo", image: "images/Kirumi.jpg", commentaire: "MAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN" },
+      { nom: "Angie Yonaga", image: "images/Angie.jpg", commentaire: "Pass" },
+      { nom: "Tenko Chabashira", image: "images/Tenko.jpg", commentaire: "Smash" },
+      { nom: "Mia Townsend", image: "images/Mia.jpg", commentaire: "HO QUE OUI" },
+      { nom: "Triss", image: "images/Triss.jpg", commentaire: "Smash" },
+      { nom: "Ciri", image: "images/Ciri.jpg", commentaire: "Smash" },
+      { nom: "Yennefer", image: "images/Yennefer.jpg", commentaire: "Smash" },
+      { nom: "Dixie Kong", image: "images/Dixie.jpg", commentaire: "Pass" },
+      { nom: "Assistante", image: "images/Assisstante.jpg", commentaire: "Pass" },
+      { nom: "Assistante Sérieuse", image: "images/Assisstante_serieuse.jpg", commentaire: "Smash" },
+      { nom: "Klule", image: "images/Kluke.jpg", commentaire: "Pass" },
+      { nom: "Zola", image: "images/Zola.jpg", commentaire: "Smash" },
+      { nom: "Edelgard", image: "images/Edelgard.jpg", commentaire: "Smash" },
+      { nom: "Rhéa", image: "images/Rhea.jpg", commentaire: "Smash" },
+      { nom: "Menzi", image: "images/Menzi.jpg", commentaire: "Pass" },
+      { nom: "Fenyx", image: "images/Fenyx.jpg", commentaire: "Pass" },
+      { nom: "Monika", image: "images/Monika.jpg", commentaire: "SMAAASH" },
+      { nom: "Yuri", image: "images/Yuri.jpg", commentaire: "Pass" },
+      { nom: "Sayori", image: "images/Sayori.jpg", commentaire: "Smash" },
+      { nom: "Natsuki", image: "images/Natsuki.jpg", commentaire: "Pass" },
+      { nom: "Evelyne", image: "images/Evelyne.jpg", commentaire: "Smash" },
+      { nom: "Emma", image: "images/Emma.jpg", commentaire: "Smash" },
+      { nom: "Chloé", image: "images/Chloe.jpg", commentaire: "Je sais plus laquelle c'est du coup j'ai mis les deux mais c'est un smash" },
+      { nom: "Serana", image: "images/Serana.jpg", commentaire: "Smash" },
+      { nom: "Lydia", image: "images/Lydia.jpg", commentaire: "Pass" },
+      { nom: "Shell", image: "images/Shell.jpg", commentaire: "Pass" },
+      { nom: "Alex", image: "images/Alex.jpg", commentaire: "Pass" },
+      { nom: "Toadette", image: "images/Toadette.jpg", commentaire: "Pass" },
+      { nom: "Aika", image: "images/Aika.jpg", commentaire: "Smash" },
+      { nom: "Fina", image: "images/Fina.jpg", commentaire: "Smash" },
+      { nom: "Fragile", image: "images/Fragile.jpg", commentaire: "Smash" },
+      { nom: "Mama", image: "images/Mama.jpg", commentaire: "Smash" },
+      { nom: "Amélie", image: "images/Amelie.jpg", commentaire: "Smash" },
+    ];
+
+    let index = 0;
+    let joueurNom = "";
+
+    // Commencer le quiz après saisie du nom
+    function commencer() {
+      const nomInput = document.getElementById("nom").value.trim();
+      if (!nomInput) {
+        alert("Veuillez entrer un nom !");
+        return;
+      }
+      joueurNom = nomInput;
+      document.getElementById("login").style.display = "none";
+      document.getElementById("perso-container").style.display = "block";
+      afficherPerso();
+    }
+
+    // Affiche le personnage actuel
+    function afficherPerso() {
+      if(index >= personnages.length) {
+        document.getElementById("perso-container").innerHTML =
+          "<h2>Fin du quiz !</h2><a href='resultats.html'>Voir les résultats</a>";
+        return;
+      }
+      const perso = personnages[index];
+      document.getElementById("persoImage").src = perso.image;
+      document.getElementById("persoNom").textContent = perso.nom;
+    }
+
+    // Vote + affiche ton avis
+    function voter(choix) {
+      const perso = personnages[index];
+
+      // Vérifie si déjà voté pour ce perso
+      db.ref("votes").orderByChild("nom").equalTo(perso.nom).once("value", snapshot => {
+        let dejaVote = false;
+
+        snapshot.forEach(snap => {
+          const vote = snap.val();
+          if (vote.joueur === joueurNom) {
+            dejaVote = true;
+          }
+        });
+
+        if (dejaVote) {
+          alert("⚠️ Vous avez déjà voté pour ce personnage !");
+          return;
+        }
+
+        // Enregistre le vote
+        db.ref("votes").push({
+          joueur: joueurNom,
+          nom: perso.nom,
+          vote: choix,
+          timestamp: Date.now()
+        }).then(() => {
+          // Cache le bloc perso et affiche ton commentaire
+          document.getElementById("perso-container").style.display = "none";
+          document.getElementById("commentaireTexte").textContent = perso.commentaire || "Aucun avis défini";
+          document.getElementById("commentaire-container").style.display = "block";
+        }).catch(err => console.error("Erreur:", err));
+      });
+    }
+
+    // Quand tu appuies sur "Continuer"
+    function suivant() {
+      index++;
+      document.getElementById("commentaire-container").style.display = "none";
+      document.getElementById("perso-container").style.display = "block";
+      afficherPerso();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+body { font-family: Arial, sans-serif; margin: 30px; background-color: #08c2b9}
+    .question { display: none; }
+    .question.active { display: block; }
+    .result { font-weight: bold; margin-top: 20px; }
+    .feedback { font-weight: bold; margin-top: 10px; }
+    .correct { color: green; }
+    .incorrect { color: red; }
+
+.photos{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.musique{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.video{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}

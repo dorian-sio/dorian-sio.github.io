@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Réponses des participants</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: #24f335;
+      padding: 20px;
+      background-image: url(images/binaire.jpg);
+      background-size: cover;       /* L'image couvre toute la page */
+      background-repeat: no-repeat; /* Pas de répétition */
+      background-attachment: fixed; /* L'image reste fixe au scroll */
+      background-position: center;  /* Centrée */
+      -webkit-text-stroke: 0.5px black; /* contour noir */
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    #tabs button {
+      margin-right: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    #tabs button:hover {
+      background-color: #ddd;
+    }
+    #tabs button.active {
+      background-color: #ccc;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Réponses des Participants</h1>
+  <div id="filteredResults"></div>
+
+  <!-- Firebase Compat SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+  <script>
+    let unsubscribeShowContent = null;
+    let filtreQuestion = "all";
+    let modeAffichage = "participant"; // 'participant' ou 'toutes'
+    function appliquerFiltreQuestion() {
+  filtreQuestion = document.getElementById("filtreQuestion").value;
+
+    if (modeAffichage === "participant") {
+  // Recharge l'onglet actif avec le nouveau filtre
+  const activeTab = document.querySelector('#tabs button.active');
+  if (activeTab) {
+      showContent(activeTab.textContent);
+    }
+} else if (modeAffichage === "toutes") {
+    showAllResponses();
+  }
+}
+    // 🔧 Configuration Firebase (la même que dans quiz.html)
+  const firebaseConfig = {
+      apiKey: "AIzaSyDNf6qrVBkrHyUM0SRqJ8UbkxAIh7-lErU",
+      authDomain: "test-fe2c7.firebaseapp.com",
+      databaseURL: "https://test-fe2c7-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "test-fe2c7",
+      storageBucket: "test-fe2c7.firebasestorage.app",
+      messagingSenderId: "939201608583",
+      appId: "1:939201608583:web:f15a2483910ee8c77fb122"
+  };
+
+  // 🔥 Initialisation Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+function resetReponses() {
+  if (!confirm("⚠️ Êtes-vous sûr de vouloir supprimer toutes les réponses ? Cette action est irréversible.")) {
+    return;
+  }
+
+  db.collection("reponsesQuiz")
+    .get()
+    .then(snapshot => {
+      const batch = db.batch(); // Crée une opération groupée
+      snapshot.forEach(doc => {
+        batch.delete(doc.ref); // Marque chaque doc pour suppression
+      });
+      return batch.commit(); // Exécute toutes les suppressions
+    })
+    .then(() => {
+      alert("✅ Toutes les réponses ont été supprimées.");
+      // Vide aussi l'affichage à l'écran
+      document.getElementById('content').innerHTML = '';
+      document.getElementById('filteredResults').innerHTML = '';
+      document.getElementById('tabs').innerHTML = '';
+    })
+}
+
+  // Maintenant que db est défini, tu peux faire ta requête :
+db.collection("reponsesQuiz").onSnapshot(
+  snapshot => {
+    const participantsSet = new Set();
+    snapshot.forEach(doc => {
+      const participant = doc.data().participant;
+      if (participant) {
+        participantsSet.add(participant);
+      }
+    });
+    const participants = Array.from(participantsSet);
+    createTabs(participants);
+  },
+  error => {
+    console.error("Erreur récupération participants :", error);
+  }
+);
+
+
+function changerFiltreQuestion() {
+  filtreQuestion = document.getElementById("filtreQuestion").value;
+
+  // Recharge onglet actif (réponses joueur filtrées)
+  const activeTab = document.querySelector('#tabs button.active');
+  if (activeTab) {
+    showContent(activeTab.textContent);
+  }
+}
+  </script>
+
+<label for="filtreQuestion">Filtrer par question :</label>
+<select id="filtreQuestion" onchange="changerFiltreQuestion()">
+  <option value="all">Toutes les questions</option>
+  <option value="1">Question 1</option>
+  <option value="2">Question 2</option>
+  <option value="3">Question 3</option>
+  <option value="4">Question 4</option>
+  <option value="5">Question 5</option>
+  <option value="6">Question 6</option>
+  <option value="7">Question 7</option>
+  <option value="8">Question 8</option>
+  <option value="9">Question 9</option>
+  <option value="10">Question 10</option>
+  <option value="11">Question 11</option>
+  <option value="12">Question 12</option>
+  <option value="13">Question 13</option>
+  <option value="14">Question 14</option>
+  <option value="15">Question 15</option>
+  <option value="16">Question 16</option>
+  <option value="17">Question 17</option>
+  <option value="18">Question 18</option>
+  <option value="19">Question 19</option>
+  <option value="20">Question 20</option>
+  <option value="21">Question 21</option>
+  <option value="22">Question 22</option>
+  <option value="23">Question 23</option>
+  <option value="24">Question 24</option>
+  <option value="25">Question 25</option>
+  <option value="26">Question 26</option>
+  <option value="27">Question 27</option>
+  <option value="28">Question 28</option>
+  <option value="29">Question 29</option>
+  <option value="30">Question 30</option>
+  <option value="31">Question 31</option>
+  <option value="32">Question 32</option>
+  <option value="33">Question 33</option>
+  <option value="34">Question 34</option>
+  <option value="35">Question 35</option>
+  <option value="36">Question 36</option>
+  <option value="37">Question 37</option>
+  <option value="38">Question 38</option>
+  <option value="39">Question 39</option>
+  <option value="40">Question 40</option>
+  <option value="41">Question 41</option>
+  <option value="42">Question 42</option>
+  <option value="43">Question 43</option>
+  <option value="44">Question 44</option>
+  <option value="45">Question 45</option>
+  <option value="46">Question 46</option>
+  <option value="47">Question 47</option>
+  <option value="48">Question 48</option>
+  <option value="49">Question 49</option>
+  <option value="50">Question 50</option>
+  <option value="51">Question 51</option>
+  <option value="52">Question 52</option>
+  <option value="53">Question 53</option>
+  <option value="54">Question 54</option>
+  <option value="55">Question 55</option>
+  <option value="56">Question 56</option>
+  <option value="57">Question 57</option>
+  <option value="58">Question 58</option>
+  <option value="59">Question 59</option>
+  <option value="60">Question 60</option>
+  <option value="61">Question 61</option>
+  <option value="62">Question 62</option>
+  <option value="63">Question 63</option>
+  <option value="64">Question 64</option>
+  <option value="65">Question 65</option>
+  <option value="66">Question 66</option>
+  <option value="67">Question 67</option>
+  <option value="68">Question 68</option>
+  <option value="69">Question 69</option>
+</select>
+<!--Reset résultats-->
+<button onclick="resetReponses()">❌ Supprimer toutes les réponses</button>
+
+<div id="tabs-container" style="display: flex; align-items: center; gap: 10px; margin-top: 20px;">
+  <div id="tabs" style="flex-grow: 1;"></div>
+  <button id="btnAllResponses" onclick="showAllResponses()" style="padding: 5px 10px; cursor: pointer;">Valider</button>
+</div>
+
+<div id="totauxParParticipant" style="font-weight: bold; margin-top: 15px;"></div>
+
+<div id="filteredResults"></div>
+
+<script>
+function showAllResponses() {
+  const filteredResults = document.getElementById("filteredResults");
+  filteredResults.innerHTML = `
+    <table style="width: 100%; border-collapse: collapse;">
+      <thead>
+        <tr>
+          <th>Participant</th>
+          <th>Question</th>
+          <th>Réponse donnée</th>
+          <th>Bonne réponse</th>
+          <th>Correcte</th>
+          <th>Timestamp</th>
+        </tr>
+      </thead>
+      <tbody id="responseBody"></tbody>
+    </table>
+  `;
+
+  const responseBody = document.getElementById('responseBody');
+  const totalDiv = document.getElementById('totauxParParticipant');
+  totalDiv.innerHTML = "";
+
+  let query = firebase.firestore().collection("reponsesQuiz");
+
+  if (filtreQuestion !== "all") {
+    query = query.where("question", "==", Number(filtreQuestion));
+  }
+
+  query = query.orderBy("question");
+
+  query.onSnapshot(snapshot => {
+    responseBody.innerHTML = "";
+    totalDiv.innerHTML = "";
+
+    if (snapshot.empty) {
+      responseBody.innerHTML = `<tr><td colspan="6" style="text-align:center;">Aucune réponse trouvée pour ce filtre.</td></tr>`;
+      totalDiv.textContent = "Total général des points : 0";
+      return;
+    }
+
+    const pointsParParticipant = {};
+
+    snapshot.forEach(doc => {
+      const data = doc.data();
+
+      if (!pointsParParticipant[data.participant]) {
+        pointsParParticipant[data.participant] = 0;
+      }
+      if (data.correcte) pointsParParticipant[data.participant]++;
+
+      const date = data.timestamp?.toDate ? data.timestamp.toDate() : new Date();
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${data.participant ?? "-"}</td>
+        <td>${data.question ?? "-"}</td>
+        <td>${data.reponseDonnee ?? "-"}</td>
+        <td>${data.bonneReponse ?? "-"}</td>
+        <td>${data.correcte ? "✅" : "❌"}</td>
+        <td>${date.toLocaleString()}</td>
+      `;
+      responseBody.appendChild(tr);
+    });
+
+totalDiv.innerHTML = "<strong>Totaux par participant :</strong><br>";
+
+// Transformer en tableau [ [participant, points], ... ]
+const sortedEntries = Object.entries(pointsParParticipant)
+  .sort((a, b) => b[1] - a[1]); // tri décroissant sur les points
+
+// Réinsérer dans l'ordre
+for (const [participant, points] of sortedEntries) {
+  totalDiv.innerHTML += `${participant} : ${points} point(s)<br>`;
+}  }, error => {
+    console.error("Erreur onSnapshot (showAllResponses) :", error);
+    responseBody.innerHTML = `<tr><td colspan="6" style="text-align:center;">Erreur lors de la récupération des réponses.</td></tr>`;
+    totalDiv.textContent = "";
+  });
+}
+</script>
+</body>
+</html>
