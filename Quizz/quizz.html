@@ -117,7 +117,10 @@
     <input type="radio" name="q2" value="The Legend of Zelda: Wand of Gamelon"> The Legend of Zelda: Wand of Gamelon<br>
     <input type="radio" name="q2" value="The Legend of Zelda: Links Faces of Evil"> The Legend of Zelda: Links Faces of Evil<br>
     <button class="valider" onclick="verifierReponse(2, 'The Legend of Zelda: Links Faces of Evil')">Valider la réponse</button>
-        <video controls src="Videos/FOE.mp4"></video>
+      <video class="video" controls>
+        <source src="Videos/FOE.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas la vidéo.
+      </video>
   </div>
   
   <!-- Résultat Question 2 -->
@@ -443,13 +446,9 @@
     <button class="valider" onclick="verifierReponseTexte(24, ['Die Hard', 'Piège de Cristal', 'Piege de Cristal'])">Valider la réponse</button>
     <div class="video-container">
   <iframe
-    width="560" height="315"
     src="https://www.youtube.com/embed/mdt-T2Anbfc"
-    title="YouTube video player"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowfullscreen>
-</iframe>
+  </iframe>
   </div>
 
   <!-- Résultat Question 24 -->
@@ -1171,63 +1170,74 @@
       document.getElementById("quiz").style.display = "block";
     }
 
-    // Fonction pour les questions à choix radio
-function verifierReponse(numero, bonneReponse) {
+    // Fonction pour vérifier la réponse à chaque question
+    function verifierReponse(numero, bonneReponse) {
     const reponse = document.querySelector(`input[name="q${numero}"]:checked`);
-    if (!reponse) { alert("Veuillez choisir une réponse."); return; }
+    if (!reponse) {
+    alert("Veuillez choisir une réponse avant de continuer.");
+    return;
+  }
 
-    const feedback = document.getElementById(`feedback${numero}`);
-    const feedbackMessage = document.getElementById(`feedback${numero}Message`);
+  const feedback = document.getElementById(`feedback${numero}`);
+  const feedbackMessage = document.getElementById(`feedback${numero}Message`);
 
-    let estCorrect = Array.isArray(bonneReponse) ? bonneReponse.includes(reponse.value) : reponse.value === bonneReponse;
+  let estCorrect;
+  if (Array.isArray(bonneReponse)) {
+    estCorrect = bonneReponse.includes(reponse.value);
+  } else {
+    estCorrect = reponse.value === bonneReponse;
+  }
 
-    feedbackMessage.textContent = estCorrect ? "Bonne réponse !" : `Mauvaise réponse ! La bonne réponse était : ${Array.isArray(bonneReponse) ? bonneReponse.join(' / ') : bonneReponse}.`;
-    feedbackMessage.classList.add(estCorrect ? 'correct' : 'incorrect');
-    feedbackMessage.classList.remove(estCorrect ? 'incorrect' : 'correct');
+  if (estCorrect) {
+    feedbackMessage.textContent = "Bonne réponse !";
+    feedbackMessage.classList.add('correct');
+    feedbackMessage.classList.remove('incorrect');
+    score++;
+  } else {
+    feedbackMessage.textContent = `Mauvaise réponse ! La bonne réponse était : ${Array.isArray(bonneReponse) ? bonneReponse.join(" / ") : bonneReponse}.`;
+    feedbackMessage.classList.add('incorrect');
+    feedbackMessage.classList.remove('correct');
+  }
 
-    document.getElementById(`question${numero}`).classList.remove("active");
-    feedback.classList.add("active");
-
-    // 🔴 Enregistrement Firestore
-    db.collection("reponsesQuiz").add({
+  // 🔴 🔥 Enregistrer dans Firestore
+  db.collection("reponsesQuiz").add({
         participant: participantNom,
         question: numero,
         reponseDonnee: reponse.value,
         bonneReponse: bonneReponse,
         correcte: estCorrect,
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    });
+      });
 
-// Fonction pour les questions texte
-function verifierReponseTexte(numeroQuestion, bonnesReponses) {
+      function verifierReponseTexte(numeroQuestion, bonnesReponses) {
     const saisie = document.getElementById(`reponse${numeroQuestion}`).value.trim().toLowerCase();
     const feedback = document.getElementById(`feedback${numeroQuestion}`);
     const feedbackMessage = document.getElementById(`feedback${numeroQuestion}Message`);
 
     const estCorrect = bonnesReponses.some(rep => saisie === rep.toLowerCase());
 
-    feedbackMessage.textContent = estCorrect ? "Bonne réponse !" : `Mauvaise réponse ! Les bonnes réponses possibles étaient : ${bonnesReponses.join(', ')}.`;
-    feedbackMessage.classList.add(estCorrect ? 'correct' : 'incorrect');
-    feedbackMessage.classList.remove(estCorrect ? 'incorrect' : 'correct');
+    if (estCorrect) {
+        feedbackMessage.textContent = "Bonne réponse !";
+        feedbackMessage.classList.add('correct');
+        feedbackMessage.classList.remove('incorrect');
+        score++;
+    } else {
+        feedbackMessage.textContent = `Mauvaise réponse ! Les bonnes réponses possibles étaient : ${bonnesReponses.join(', ')}.`;
+        feedbackMessage.classList.add('incorrect');
+        feedbackMessage.classList.remove('correct');
+    }
 
-    document.getElementById(`question${numeroQuestion}`).classList.remove("active");
-    feedback.classList.add("active");
+    // Masquer la question actuelle
+    const questionDiv = document.getElementById(`question${numeroQuestion}`);
+    if (questionDiv) questionDiv.classList.remove("active");
 
-    // 🔴 Enregistrement Firestore
-    db.collection("reponsesQuiz").add({
-        participant: participantNom,
-        question: numeroQuestion,
-        reponseDonnee: saisie,
-        bonnesReponses: bonnesReponses,
-        bonneReponse: bonnesReponses[0],
-        correcte: estCorrect,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    });
-}
+// Afficher le feedback
+if (feedback) feedback.classList.add("active");
 
 // Si tu veux, tu peux passer automatiquement à la question suivante après quelques secondes :
 // setTimeout(() => suivant(numeroQuestion), 2000);
-  
+}
+
   // 🔥 Enregistrer dans Firestore
   db.collection("reponsesQuiz").add({
     participant: participantNom,
@@ -1241,6 +1251,7 @@ function verifierReponseTexte(numeroQuestion, bonnesReponses) {
 
   document.getElementById(`question${numeroQuestion}`).classList.remove("active");
   feedback.classList.add("active");
+}
 
     // Fonction pour passer à la question suivante ou afficher le score final
     function suivant(numero){
