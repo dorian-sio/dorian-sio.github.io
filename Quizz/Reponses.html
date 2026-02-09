@@ -106,6 +106,32 @@ function resetReponses() {
     })
 }
 
+  <script>
+function createTabs(participants) {
+  const tabsDiv = document.getElementById("tabs");
+  tabsDiv.innerHTML = "";
+
+  participants.forEach((participant, index) => {
+    const btn = document.createElement("button");
+    btn.textContent = participant;
+
+    if (index === 0) {
+      btn.classList.add("active");
+      showContent(participant);
+    }
+
+    btn.onclick = () => {
+      document.querySelectorAll("#tabs button")
+        .forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      showContent(participant);
+    };
+
+    tabsDiv.appendChild(btn);
+  });
+}
+</script>
+    
   // Maintenant que db est défini, tu peux faire ta requête :
 db.collection("reponsesQuiz").onSnapshot(
   snapshot => {
