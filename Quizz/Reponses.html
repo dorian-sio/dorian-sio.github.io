@@ -106,7 +106,6 @@ function resetReponses() {
     })
 }
 
-  <script>
 function createTabs(participants) {
   const tabsDiv = document.getElementById("tabs");
   tabsDiv.innerHTML = "";
@@ -130,7 +129,6 @@ function createTabs(participants) {
     tabsDiv.appendChild(btn);
   });
 }
-</script>
     
   // Maintenant que db est défini, tu peux faire ta requête :
 db.collection("reponsesQuiz").onSnapshot(
