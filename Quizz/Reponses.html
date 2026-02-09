@@ -117,7 +117,7 @@ db.collection("reponsesQuiz").onSnapshot(
       }
     });
     const participants = Array.from(participantsSet);
-    //createTabs(participants);
+    createTabs(participants);
   },
   error => {
     console.error("Erreur récupération participants :", error);
