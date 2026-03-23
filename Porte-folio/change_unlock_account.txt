@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestion Utilisateurs LDAP</title>
+    <style>
+        .container {
+          display: inline-block; /* La largeur du cadre s'adapte au contenu */
+          border: 1px solid #ccc;
+          padding: 10px;
+          margin: 10px;
+          border-radius: 5px;
+          background-color: #f9f9f9;
+        }
+
+        @media (max-width: 600px) {
+          .container {
+            display:block;
+            width: 100%;         /* Pour les petits écrans, on peut quand même étendre à 100% */
+            box-sizing: border-box;
+          }
+        }
+    </style>
+</head>
+<body>
+
+<?php
+$nom = $_POST['nom'] ?? '';
+$prenom = $_POST['prenom'] ?? '';
+?>
+
+<!-- Saisie utilisateur -->
+<!-- Formulaire HTML intégré -->
+<form method="POST" action="">
+    <label for="nom">Entrez votre nom de famille :</label>
+    <input type="text" name="nom" id="nom" value="<?= htmlspecialchars($nom) ?>" required>
+<br>
+    <label for="prenom">Entrez votre prénom :</label>
+    <input type="text" name="prenom" id="prenom" value="<?= htmlspecialchars($prenom) ?>" required>
+<br>
+    <button type="submit">Rechercher</button>
+</form>
+
+<?php
+$serveur = "Serveur_AD";
+$port = 636;
+$user = "user de l'AD";
+$mdp = "MDP de $user";
+$base_dn = "dc=nom du ,dc=domaine";
+
+//Echapper les caractères spéciaux
+
+function escape_ldap_filter($str) {
+        return preg_replace('/([\*\(\)\\\])/', '\\\\$1', $str);
+}
+
+//Fonction déverouillage compte AD
+
+function unlock_account($ldap_connection, $dn): string {
+    if (empty($dn)) {
+        return "Erreur : DN vide ou non fourni";
+    }
+
+    $entry = ['lockoutTime' => ['0']];
+    if (ldap_mod_replace($ldap_connection, $dn, $entry)) {
+        return "Compte déverrouillé avec succès pour " . htmlspecialchars($cn);
+    } else {
+        return "Erreur lors du déverrouillage du compte : " . ldap_error($ldap_connection);
+    }
+}
+
+//Connexion au serveur
+putenv('LDAPTLS_REQCERT=never');
+$Connexion_serveur = ldap_connect("ldaps://$serveur:$port") or die("Impossible de se connecter à $serveur");
+ldap_set_option($Connexion_serveur, LDAP_OPT_PROTOCOL_VERSION, 3);
+ldap_set_option($Connexion_serveur, LDAP_OPT_REFERRALS, 0);
+
+$bind = @ldap_bind($Connexion_serveur, $user, $mdp);
+if ($bind === false) {
+        die("Echec de l'authentification LDAP : " . ldap_error($Connexion_serveur));
+}
+
+echo "Connexion LDAP réussie<br>";
+
+//Initialisation variables
+
+$message = "";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+//Récupération des champs
+
+        if (isset($_POST['nom'], $_POST['prenom'])) {
+        $nom = trim($_POST['nom']);
+        $prenom = trim($_POST['prenom']);
+        echo "Recherche pour : <strong>" . htmlspecialchars($prenom . " " . $nom) . "</strong><br>";
+        }
+
+//Déverouillage du compte
+        if (isset($_POST['unlock_account'], $_POST['cn'])) {
+        $cn = $_POST['cn'];
+        $message = unlock_account($Connexion_serveur, $cn);
+}
+
+//Changement MDP
+
+if (isset($_POST['change_pwd'], $_POST['cn'], $_POST['new_password'])) {
+        $cn = $_POST['cn'];
+        $nouveau_mdp = $_POST['new_password'];
+
+//Validation des critères de MDP
+
+        if (strlen($nouveau_mdp) < 8) {
+                $message = "Le mot de passe doit faire au moins 8 caractères.";
+        } else {
+
+//Changement dans l'AD
+// Encodage du mot de passe au format AD : UTF-16LE + guillemets
+    $newPass = '"' . $nouveau_mdp . '"';
+    $newPass = mb_convert_encoding($newPass, 'UTF-16LE');
+    $entry = ["unicodePwd" => [$newPass]];
+    $result = @ldap_mod_replace($Connexion_serveur, $cn, $entry);
+
+    if ($result) {
+        $message = "<p style='color:green;'>Mot de passe changé avec succès pour <strong>" . htmlspecialchars($cn) . "</strong>.</p>";
+    } else {
+        $message = "<p style='color:red;'>Erreur lors du changement du mot de passe : " . ldap_error($Connexion_serveur) . "</p>";
+    }
+}
+
+//Récupération de l'utilisteur
+
+        if (isset($_POST['nom'], $_POST['prenom'])) {
+                $nom = trim($_POST['nom']);
+                $prenom = trim($_POST['prenom']);
+                echo "Nom reçu : <strong>" . htmlspecialchars($prenom . " " . $nom) . "</strong><br>";
+				        }
+}
+}
+
+if (!empty($message)) {
+        echo "<p style='color:blue;'>$message</p>";
+}
+
+//Récupération de l'utilisteur
+
+$search_filter_nom = escape_ldap_filter($nom);
+$search_filter_prenom = escape_ldap_filter($prenom);
+$filtre = "(&(sn={$search_filter_nom})(givenName={$search_filter_prenom}))";
+
+$ldapattr = ["dn", "sAMAccountName"];
+//recherche des utilisateurs
+$liste = ldap_search($Connexion_serveur, $base_dn, $filtre, $ldapattr);
+
+if (!$liste) {
+        die("Erreur de recherche LDAP : " . ldap_error($Connexion_serveur) . " (Code : " . ldap_errno($Connexion_serveur) . ")");
+}
+
+$tableau_util = ldap_get_entries($Connexion_serveur, $liste);
+
+if ($tableau_util['count'] > 0) {
+        echo $tableau_util['count'] . " entrées trouvées<br>";
+
+        for ($i = 0; $i < $tableau_util["count"]; $i++) {
+        $dn = $tableau_util[$i]["dn"];
+
+        //extraire uniquement le CN
+
+        $cn = "";
+        if (preg_match('/cn=([^,]+)/i', $dn, $matches)) {
+                $cn = $matches[1];
+        }
+
+        //chercher le login
+
+        $login = "";
+        if (isset($tableau_util[$i]['samaccountname'][0])) {
+            $login = $tableau_util[$i]['samaccountname'][0];
+        }
+
+        //affichge
+
+        echo "<div class='container'>";
+        echo "<div style='border:1px solid #ccc; padding:1em; margin-bottom:1em;'>";
+        echo "<strong>CN :</strong> " . htmlspecialchars($cn) . "<br>";
+        echo "<strong>Login :</strong> " . htmlspecialchars($login) . "<br>";
+        echo "<strong>DN :</strong> " . htmlspecialchars($dn) . "<br>";
+
+        echo "</form>";
+
+        echo "<form method='POST'>";
+        echo "<input type='hidden' name='dn' value='" . htmlspecialchars($dn, ENT_QUOTES) . "' />";
+        echo "<input type='password' name='new_password' placeholder='Nouveau mot de passe' />";
+        echo "<button type='submit' name='change_pwd' value='1'>Changer le mot de passe</button>";
+        echo "</form>";
+
+        echo "<form method='POST'>";
+                echo "<input type='hidden' name='cn' value='" . htmlspecialchars($dn, ENT_QUOTES) . "'/>";
+                echo "<button type='submit' name='unlock_account' value='1'>Déverrouiller le compte</button>";
+        echo "</form>";
+        echo "</div>";
+        }
+} else {
+        echo "Aucune entrée trouvée pour ce nom.";
+}
+?>
+
+</body>
+</html>

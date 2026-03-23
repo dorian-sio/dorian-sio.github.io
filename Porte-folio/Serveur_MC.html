@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serveur Minecraft</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Installation d'un serveur Minecraft sur un PC de 2008</h1>
+    <br>
+    <p class="texte">J'avais pour but d'installer un serveur Minecraft sur un PC ayant des caractéristiques faible pour tester ses performances</p>
+    <p class="texte">Ce serveur tourne sur une distribution Linux, mais le PC ne faisant pas tourner Debian 5.0.5, j'ai donc installer AntiX</p>
+    <p class="texte">Une fois installé et l'IP paramétrée, je n'avais toujours pas de réseau. Cela était dû au fait que la carte réseau était inactive au démarrage</p>
+    <p class="texte">j'ai ensuite édité le fichier crontab pour démarrer automatiquement la carte au démarrage du PC</p>
+    <img class="image" src="images/cron.png"/>
+    <p class="texte">Il m'a ensuite fallu télécharger une version Java compatible avec la version de Minecraft sur le site d'Oracle </p>
+    <p class="texte">et modifier le fichier .bashrc pour indiquer où est installé Java et l'ajouter au PATH</p>
+    <p class="texte">Le serveur est maintenant fonctionnel, mais il reste des configurations à faire</p>
+    <br>
+    <p class="texte">Premièrement, je vais autorisé les cracks. Pour cela, j'ouvre le fichier server.properties contenu dans le dossier du serveur</p>
+    <p class="texte">je vais y modifier la ligne "online-mode" pour la passer à false</p>
+    <p class="texte">Enfin, je vais faire ce script</p>
+    <img class="image" src="images/server.png"/>
+    <p class="texte">Celui-ci lance le serveur Minecraft, et le relance automatiquement s'il s'arrête</p>
+    <p class="texte">Enfin, une fois le serveur lancé avec 5 hôte connectés dessus, le serveur tient bien la charge compte tenu de ses 2Go de RAM alloués et un Intel Core2 Duo de 2.0GHz et une distrib 32 bits</p>
+    <img class="test2" src="images/MC.png"/>
+    <a class="btn2 exp" href="Experiences.html" class="retour">Retour</a>
+</body>
+</html>
