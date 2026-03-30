@@ -42,6 +42,13 @@ body
     margin: 0 auto;
 }
 
+.image2{
+    max-width: 50%;
+    max-height: 50%;
+    display: block;
+    margin: 0 auto;
+}
+
 .test{
     margin-left: 25%;
 }
