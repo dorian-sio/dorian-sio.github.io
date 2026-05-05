@@ -1,0 +1,32 @@
+body { font-family: Arial, sans-serif; margin: 30px; background-image: url(images/image.jpg); background-size: cover; background-repeat: no-repeat; background-attachment: fixed; background-position: center; }
+    .question { display: none; }
+    .question.active { display: block; }
+    .result { font-weight: bold; margin-top: 20px; }
+    .feedback { font-weight: bold; margin-top: 10px; }
+    .correct { color: rgb(54, 223, 54); }
+    .incorrect { color: rgb(240, 92, 92); }
+
+.photos{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.musique{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.video{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.question{
+    color: rgb(0, 212, 212);
+}

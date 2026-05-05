@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Quizz</title>
+  <link rel="stylesheet" href="Quizz2.css"/> 
+</head>
+<body>
+
+  <h1>Quizz</h1>
+
+  <div id="identite">
+    <label for="nom">Entrez votre nom :</label>
+    <input type="text" id="nom" placeholder="Yuna ma femme" autocomplete="off" />
+    <button onclick="commencerQuiz()">Commencer le quiz</button>
+    <h1>Règles</h1>
+    <h2>C'est juste un quizz sur le jeu vidéo mais je suis une grosse grosse salope</h2>
+    <!-- Se rendre à une certaine question -->
+<label for="goToQuestion">Aller à la question :</label>
+<select id="goToQuestion" onchange="allerAQuestion()">
+  <option value="">-- Choisir une question --</option>
+  <option value="1">Question 1</option>
+  <option value="2">Question 2</option>
+  <option value="3">Question 3</option>
+  <option value="4">Question 4</option>
+  <option value="5">Question 5</option>
+  <option value="6">Question 6</option>
+  <option value="7">Question 7</option>
+  <option value="8">Question 8</option>
+  <option value="9">Question 9</option>
+  <option value="10">Question 10</option>
+  <option value="11">Question 11</option>
+  <option value="12">Question 12</option>
+  <option value="13">Question 13</option>
+  <option value="14">Question 14</option>
+  <option value="15">Question 15</option>
+  <option value="16">Question 16</option>
+  <option value="17">Question 17</option>
+  <option value="18">Question 18</option>
+  <option value="19">Question 19</option>
+  <option value="20">Question 20</option>
+  <option value="21">Question 21</option>
+  <option value="22">Question 22</option>
+  <option value="23">Question 23</option>
+  <option value="24">Question 24</option>
+  <option value="25">Question 25</option>
+  <option value="26">Question 26</option>
+  <option value="27">Question 27</option>
+  <option value="28">Question 28</option>
+  <option value="29">Question 29</option>
+</select>
+  </div>
+
+<div id="quiz" style="display:none;">
+  <!-- Question 1 -->
+  <div class="question active" id="question1">
+    <h2>1. Dans le jeu The Legend of Zelda Ocarina of Time, de combien d'année avance t-on lorsqu'on récupère la Master Sword?</h2>
+    <input type="radio" name="q1" value="5 ans"> 5 ans<br>
+    <input type="radio" name="q1" value="7 ans"> 7 ans<br>
+    <input type="radio" name="q1" value="9 ans"> 9 ans<br>
+    <button class="valider" onclick="verifierReponse(1, '7 ans')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 1 -->
+  <div class="question" id="feedback1">
+    <p id="feedback1Message" class="feedback"></p>
+    <button onclick="suivant(1)">Suivant</button>
+  </div>
+
+  <!-- Question 2 -->
+  <div class="question" id="question2">
+    <h2>2. Dans le jeu Portal 2, combien y a t-il de fluides?</h2>
+    <input type="radio" name="q2" value="1"> 1<br>
+    <input type="radio" name="q2" value="2"> 2<br>
+    <input type="radio" name="q2" value="3"> 3<br>
+    <button class="valider" onclick="verifierReponse(2, '3')">Valider la réponse</button>
+  </div>
+  
+  <!-- Résultat Question 2 -->
+  <div class="question" id="feedback2">
+    <p id="feedback2Message" class="feedback"></p>
+    <button onclick="suivant(2)">Suivant</button>
+  </div>
+
+  <!-- Question 3 -->
+  <div class="question" id="question3">
+    <h2>3. Dans les derniers jeux Monster Hunter, combien y a t-il de types d'armes jouables?</h2>
+    <input type="radio" name="q3" value="12"> 12<br>
+    <input type="radio" name="q3" value="14"> 14<br>
+    <input type="radio" name="q3" value="une infinité"> une infinité<br>
+    <button class="valider" onclick="verifierReponse(3, '14')">Valider la réponse</button>  
+  </div>
+
+  <!-- Résultat Question 3 -->
+  <div class="question" id="feedback3">
+    <p id="feedback3Message" class="feedback"></p>
+    <button onclick="suivant(3)">Suivant</button>
+  </div>
+
+  <!-- Question 4 -->
+  <div class="question" id="question4">
+    <h2>4. De quel jeu provient cette musique ?</h2>
+    <input type="text" id="reponse4" placeholder="Tape ta réponse ici" autocomplete="off"><br>
+    <button class="valider" onclick="verifierReponseTexte(4, ['ff10', 'FFX', 'Final Fantasy X', 'Le meilleur Final Fantasy du monde entier mon dieu que ce jeu est incroyable, Yuna ma femme'])">Valider la réponse</button>
+    <audio class="musique" controls src="audios/to_zanarkand.mp3"></audio>
+  </div>
+
+  <!-- Résultat Question 4 -->
+   <div class="question" id="feedback4">
+    <p id="feedback4Message" class="feedback"></p>
+    <button onclick="suivant(4)">Suivant</button>
+   </div>
+
+   <!-- Question 5 -->
+  <div class="question" id="question5">
+    <h2>5. Quel est le meilleur jeu du monde?</h2>
+    <input type="text" id="reponse5" placeholder="Tape ta réponse ici" autocomplete="off"><br>
+    <button class="valider" onclick="verifierReponseToujoursCorrecte(5)">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 5 -->
+   <div class="question" id="feedback5">
+    <p id="feedback5Message" class="feedback"></p>
+    <button onclick="suivant(5)">Suivant</button>
+   </div>
+
+   <!-- Question 6 -->
+  <div class="question" id="question6">
+    <h2>6. Quelle est la console Microsoft la plus vendue?</h2>
+    <input type="radio" name="q6" value="XBOX"> XBOX<br>
+    <input type="radio" name="q6" value="XBOX 360"> XBOX 360<br>
+    <input type="radio" name="q6" value="XBOX ONE"> XBOX ONE<br>
+    <button class="valider" onclick="verifierReponse(6, 'XBOX 360')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 6 -->
+   <div class="question" id="feedback6">
+    <p id="feedback6Message" class="feedback"></p>
+    <button onclick="suivant(6)">Suivant</button>
+   </div>
+
+   <!-- Question 7 -->
+  <div class="question" id="question7">
+    <h2>7. Je suis un jeu STR, premier de ma licence, mais adapté d'un célèbre jeu devenu un MMORPG par la suite.<br>Mon univers possède trois races, les Terrans, les Zergs et les Protoss, je suis, je suis, je suis...</h2>
+    <input type="text" id="reponse7" placeholder="Tape ta réponse ici" autocomplete="off"><br>
+    <button class="valider" onclick="verifierReponseTexte(7, ['Starcraft'])">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 7 -->
+   <div class="question" id="feedback7">
+    <p id="feedback7Message" class="feedback"></p>
+    <button onclick="suivant(7)">Suivant</button>
+   </div>
+
+   <!-- Question 8 -->
+  <div class="question" id="question8">
+    <h2>8. Dans le jeu Super Mario 64, il y a une inscription qui dit "L is Real 2401", interprétée par les joueurs comme un indice indiquant que Luigi serait dans le jeu.<br>Cette rumeur est évidemment fausse, mais dans Mario 64 DS, ce rêve est devenu réalité.<br>Mais combien d'années après le jeu original était-ce?</h2>
+    <input type="radio" name="q8" value="5 ans"> 5 ans<br>
+    <input type="radio" name="q8" value="8 ans"> 8 ans<br>
+    <input type="radio" name="q8" value="20 ans"> 20 ans<br>
+    <button class="valider" onclick="verifierReponse(8, '8 ans')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 8 -->
+   <div class="question" id="feedback8">
+    <p id="feedback8Message" class="feedback"></p>
+    <button onclick="suivant(8)">Suivant</button>
+   </div>
+
+   <!-- Question 9 -->
+  <div class="question" id="question9">
+    <h2>9. Dans l'extension de The Elder Scrolls V: Skyrim Dragonborn, on nous emmène sur un nouveau continent.<br>Ce continent est celui sur lequel se passe un précédant jeu de la licence, mais quel est-il?</h2>
+    <input type="radio" name="q9" value="Morrowind"> The Elder Scrolls III: Morrowind<br>
+    <input type="radio" name="q9" value="Daggerfall"> The Elder Scrolls II: Daggerfall<br>
+    <input type="radio" name="q9" value="Legends"> The Elder Scrolls: Legends<br>
+    <button class="valider" onclick="verifierReponse(9, 'Morrowind')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 9 -->
+   <div class="question" id="feedback9">
+    <p id="feedback9Message" class="feedback"></p>
+    <button onclick="suivant(9)">Suivant</button>
+   </div>
+
+   <!-- Question 10 -->
+  <div class="question" id="question10">
+    <h2>10. Dans le jeu Baldi's Basic, combien y a t-il de cahiers à ramasser?</h2>
+    <input type="radio" name="q10" value="7"> 7<br>
+    <input type="radio" name="q10" value="10"> 10<br>
+    <input type="radio" name="q10" value="15"> 15<br>
+    <button class="valider" onclick="verifierReponse(10, '7')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 10 -->
+   <div class="question" id="feedback10">
+    <p id="feedback10Message" class="feedback"></p>
+    <button onclick="suivant(10)">Suivant</button>
+   </div>
+
+   <!-- Question 11 -->
+  <div class="question" id="question11">
+    <h2>11. Dans le jeu Doki Doki Literature Club, quel personnage chante une chanson à la fin du jeu?</h2>
+    <input type="radio" name="q11" value="Le protagoniste"> Le protagoniste<br>
+    <input type="radio" name="q11" value="Sayori"> Sayori<br>
+    <input type="radio" name="q11" value="Monika"> Monika<br>
+    <button class="valider" onclick="verifierReponse(11, 'Monika')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 11 -->
+   <div class="question" id="feedback11">
+    <p id="feedback11Message" class="feedback"></p>
+    <button onclick="suivant(11)">Suivant</button>
+   </div>
+
+   <!-- Question 12 -->
+  <div class="question" id="question12">
+    <h2>12. Combien y a t-il de Mudokons à sauver dans le jeu Oddworld: Abe's Oddysey?</h2>
+    <input type="radio" name="q12" value="75"> 75<br>
+    <input type="radio" name="q12" value="99"> 99<br>
+    <input type="radio" name="q12" value="100"> 100<br>
+    <button class="valider" onclick="verifierReponse(12, '99')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 12 -->
+   <div class="question" id="feedback12">
+    <p id="feedback12Message" class="feedback"></p>
+    <button onclick="suivant(12)">Suivant</button>
+   </div>
+
+   <!-- Question 13 -->
+  <div class="question" id="question13">
+    <h2>13. A ce jour, quel est le dernier jeu Touhou sorti?</h2>
+    <input type="radio" name="q13" value="19"> Touhou 19<br>
+    <input type="radio" name="q13" value="20"> Touhou 20<br>
+    <input type="radio" name="q13" value="21"> Touhou 21<br>
+    <button class="valider" onclick="verifierReponse(13, '20')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 13 -->
+   <div class="question" id="feedback13">
+    <p id="feedback13Message" class="feedback"></p>
+    <button onclick="suivant(13)">Suivant</button>
+   </div>
+
+   <!-- Question 14 -->
+  <div class="question" id="question14">
+    <h2>14. Quel jour est sorti le premier jeu de la série The Legend of Zelda? (format jour/mois/année)</h2>
+    <input type="text" id="reponse14" placeholder="Tape ta réponse ici" autocomplete="off"><br>
+    <button class="valider" onclick="verifierReponseTexte(14, ['21/02/1986'], ['21/02/86'])">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 14 -->
+   <div class="question" id="feedback14">
+    <p id="feedback14Message" class="feedback"></p>
+    <button onclick="suivant(14)">Suivant</button>
+   </div>
+
+   <!-- Question 15 -->
+  <div class="question" id="question15">
+    <h2>15. Quel est son prénom?</h2>
+    <input type="text" id="reponse15" placeholder="Tape ta réponse ici" autocomplete="off"><br>
+    <button class="valider" onclick="verifierReponseTexte(15, ['Sam'], ['Samuel'])">Valider la réponse</button>
+    <img class="photo" src="Images/Sam.png">
+  </div>
+
+  <!-- Résultat Question 15 -->
+   <div class="question" id="feedback15">
+    <p id="feedback15Message" class="feedback"></p>
+    <button onclick="suivant(15)">Suivant</button>
+   </div>
+
+   <!-- Question 16 -->
+  <div class="question" id="question16">
+    <h2>16. En 2017, un ransomware assez spécial a vu le jour. Celui-ci chiffrait les données de l'ordinateur, mais ne demandait aucune somme en retour.<br>En effet, il demandait de faire 200 millions de point sur un jeu Touhou, mais sur quel opus?</h2>
+    <input type="text" id="reponse16" placeholder="Tape ta réponse ici" autocomplete="off"><br>
+    <button class="valider" onclick="verifierReponseTexte(16, ['12', 'Touhou 12', 'Touhou 12 : Undefined Fantastic Object'], ['UFO'])">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 16 -->
+   <div class="question" id="feedback16">
+    <p id="feedback16Message" class="feedback"></p>
+    <button onclick="suivant(16)">Suivant</button>
+   </div>
+
+   <!-- Question 17 -->
+  <div class="question" id="question17">
+    <h2>17. Si je me trouve en skellige, à quel jeu suis-je en train de jouer?</h2>
+    <input type="radio" name="q17" value="Fallout 3"> Fallout 3<br>
+    <input type="radio" name="q17" value="The Witcher 3"> The Witcher 3 : Wild Hunt<br>
+    <input type="radio" name="q17" value="Final Fantasy XVI"> Final Fantasy XVI<br>
+    <button class="valider" onclick="verifierReponse(17, 'The Witcher 3')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 17 -->
+   <div class="question" id="feedback17">
+    <p id="feedback17Message" class="feedback"></p>
+    <button onclick="suivant(17)">Suivant</button>
+   </div>
+
+   <!-- Question 18 -->
+  <div class="question" id="question18">
+    <h2>18. Je suis un personnage qui donne son nom à un jeu. Le générique de mon dessin animé est chanté par William Leymergie, qui suis-je?</h2>
+    <input type="text" id="reponse18" placeholder="Tape ta réponse ici" autocomplete="off"><br>
+    <button class="valider" onclick="verifierReponseTexte(18, ['Pacman', 'Pac-Man', 'Pac Man'])">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 18 -->
+   <div class="question" id="feedback18">
+    <p id="feedback18Message" class="feedback"></p>
+    <button onclick="suivant(18)">Suivant</button>
+   </div>
+
+   <!-- Question 19 -->
+  <div class="question" id="question19">
+    <h2>19. Jusqu'à quel niveau faut-il aller pour "terminer" Tetris?</h2>
+    <input type="text" id="reponse19" placeholder="Tape ta réponse ici" autocomplete="off"><br>
+    <button class="valider" onclick="verifierReponseTexte(19, ['29'])">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 19 -->
+   <div class="question" id="feedback19">
+    <p id="feedback19Message" class="feedback"></p>
+    <button onclick="suivant(19)">Suivant</button>
+   </div>
+
+   <!-- Question 20 -->
+  <div class="question" id="question20">
+    <h2>20. Dans Skyrim, il existe une exploit utilisant la forge, l'enchantement et l'alchimie permettant d'être beaucoup trop fort pour le jeu (voire de le faire planter). Comment appelle t-on cet exploit?</h2>
+    <input type="text" id="reponse20" placeholder="Tape ta réponse ici" autocomplete="off"><br>
+    <button class="valider" onclick="verifierReponseTexte(20, ['Triforge', 'La Triforge'])">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 20 -->
+   <div class="question" id="feedback20">
+    <p id="feedback20Message" class="feedback"></p>
+    <button onclick="suivant(20)">Suivant</button>
+   </div>
+
+   <!-- Question 21 -->
+  <div class="question" id="question21">
+    <h2>21. Dans The Legend of Zelda : Breath of the Wild, que permet le glitch du "Menu Overloading"?</h2>
+    <input type="text" id="reponse21" placeholder="Tape ta réponse ici" autocomplete="off"><br>
+    <button class="valider" onclick="verifierReponseTexte(21, ['Dupliquer des équipements', 'Dupliquer des objets'])">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 21 -->
+   <div class="question" id="feedback21">
+    <p id="feedback21Message" class="feedback"></p>
+    <button onclick="suivant(21)">Suivant</button>
+   </div>
+
+  <!-- Question 22 -->
+  <div class="question" id="question22">
+    <h2>22. Quel est ce jeu?</h2>
+    <img class="photo" src="Images/Sad_Satan.jpg">
+    <input type="text" id="reponse22" placeholder="Tape ta réponse ici" autocomplete="off"><br>
+    <button class="valider" onclick="verifierReponseTexte(22, ['Sad Satan'])">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 22 -->
+   <div class="question" id="feedback22">
+    <p id="feedback22Message" class="feedback"></p>
+    <button onclick="suivant(22)">Suivant</button>
+   </div>
+
+   <!-- Question 23 -->
+  <div class="question" id="question23">
+    <h2>23. Qui a produit les trois jeux Zelda surnommés "La Triforce de la Honte"?</h2>
+    <input type="text" id="reponse23" placeholder="Tape ta réponse ici" autocomplete="off"><br>
+    <button class="valider" onclick="verifierReponseTexte(23, ['Philips', 'Phillips'])">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 23 -->
+   <div class="question" id="feedback23">
+    <p id="feedback23Message" class="feedback"></p>
+    <button onclick="suivant(23)">Suivant</button>
+   </div>
+
+   <!-- Question 24 -->
+  <div class="question" id="question24">
+    <h2>24. A quel niveau minimum est-il possible de terminer Final Fantasy VII?</h2>
+    <input type="text" id="reponse24" placeholder="Tape ta réponse ici" autocomplete="off"><br>
+    <button class="valider" onclick="verifierReponseTexte(24, ['27', 'Niveau 27'])">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 24 -->
+   <div class="question" id="feedback24">
+    <p id="feedback24Message" class="feedback"></p>
+    <button onclick="suivant(24)">Suivant</button>
+   </div>
+
+   <!-- Question 25 -->
+  <div class="question" id="question25">
+    <h2>25. De quelle musique de jeu est-ce une reprise?</h2>
+    <input type="radio" name="q25" value="My Time"> My Time<br>
+    <input type="radio" name="q25" value="The Edge of Dawn"> The Edge of Dawn<br>
+    <input type="radio" name="q25" value="Still Alive"> Still Alive<br>
+    <button class="valider" onclick="verifierReponse(25, 'Still Alive')">Valider la réponse</button>
+    <video class="video" controls src="videos/Still_Alive.mp4"></video>
+  </div>
+
+  <!-- Résultat Question 25 -->
+   <div class="question" id="feedback25">
+    <p id="feedback25Message" class="feedback"></p>
+    <button onclick="suivant(25)">Suivant</button>
+   </div>
+
+   <!-- Question 26 -->
+  <div class="question" id="question26">
+    <h2>26. Quelle est la nationalité du créateur du très célèbre jeu Minecraft?</h2>
+    <input type="text" id="reponse26" placeholder="Tape ta réponse ici" autocomplete="off"><br>
+    <button class="valider" onclick="verifierReponseTexte(26, ['Suédois', 'Suédoise', 'suedois', 'suedoise'])">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 26 -->
+   <div class="question" id="feedback26">
+    <p id="feedback26Message" class="feedback"></p>
+    <button onclick="suivant(26)">Suivant</button>
+   </div>
+   
+   <!-- Question 27 -->
+  <div class="question" id="question27">
+    <h2>27. Quelle est la nationalité de Ralph Bear, créateur du jeu vidéo?</h2>
+    <input type="radio" name="q27" value="Anglais"> Anglais<br>
+    <input type="radio" name="q27" value="Allemand"> Allemand<br>
+    <input type="radio" name="q27" value="Italien"> Italien<br>
+    <button class="valider" onclick="verifierReponse(27, 'Allemand')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 27 -->
+   <div class="question" id="feedback27">
+    <p id="feedback27Message" class="feedback"></p>
+    <button onclick="suivant(27)">Suivant</button>
+   </div>
+
+   <!-- Question 28 -->
+  <div class="question" id="question28">
+    <h2>28. Quel est le jeu le plus vendu de la Playstation?</h2>
+    <input type="radio" name="q28" value="Gran Turismo"> Gran Turismo<br>
+    <input type="radio" name="q28" value="Final Fanatsy VII"> Final Fanatsy VII<br>
+    <input type="radio" name="q28" value="Crash Bandicoot"> Crash Bandicoot<br>
+    <button class="valider" onclick="verifierReponse(28, 'Gran Turismo')">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 28 -->
+   <div class="question" id="feedback28">
+    <p id="feedback28Message" class="feedback"></p>
+    <button onclick="suivant(28)">Suivant</button>
+   </div>
+
+   <!-- Question 29 -->
+  <div class="question" id="question29">
+    <h2>29. Comment s'appelle le monde dans lequel se déroule le jeu Dofus?</h2>
+    <input type="text" id="reponse29" placeholder="Tape ta réponse ici" autocomplete="off"><br>
+    <button class="valider" onclick="verifierReponseTexte(29, ['Monde des douze', 'Le monde des douze', 'Le monde des 12', 'Monde des 12'])">Valider la réponse</button>
+  </div>
+
+  <!-- Résultat Question 29 -->
+   <div class="question" id="feedback29">
+    <p id="feedback29Message" class="feedback"></p>
+    <button onclick="suivant(29)">Suivant</button>
+   </div>
+
+  <!-- Résultat Final -->
+  <div class="question" id="resultat">
+    <p class="result" id="score"></p>
+    <button onclick="recommencerQuiz()">Recommencer le quiz</button>
+  </div>
+</div>
+
+<!-- Firebase compatibilité pour HTML pur -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+  <script>
+
+    let participantNom = "";
+    let score = 0;
+
+    function commencerQuiz() {
+      const nomInput = document.getElementById("nom").value.trim();
+      if (!nomInput) {
+        alert("Veuillez entrer votre nom.");
+        return;
+      }
+      participantNom = nomInput;
+      document.getElementById("identite").style.display = "none";
+      document.getElementById("quiz").style.display = "block";
+    }
+
+    // Fonction pour vérifier la réponse à chaque question
+    function verifierReponse(numero, bonneReponse) {
+    const reponse = document.querySelector(`input[name="q${numero}"]:checked`);
+    if (!reponse) {
+    alert("Veuillez choisir une réponse avant de continuer.");
+    return;
+  }
+
+  const feedback = document.getElementById(`feedback${numero}`);
+  const feedbackMessage = document.getElementById(`feedback${numero}Message`);
+
+  let estCorrect;
+  if (Array.isArray(bonneReponse)) {
+    estCorrect = bonneReponse.includes(reponse.value);
+  } else {
+    estCorrect = reponse.value === bonneReponse;
+  }
+
+  if (estCorrect) {
+    feedbackMessage.textContent = "Bonne réponse !";
+    feedbackMessage.classList.add('correct');
+    feedbackMessage.classList.remove('incorrect');
+    score++;
+  } else {
+    feedbackMessage.textContent = `Mauvaise réponse ! La bonne réponse était : ${Array.isArray(bonneReponse) ? bonneReponse.join(" / ") : bonneReponse}.`;
+    feedbackMessage.classList.add('incorrect');
+    feedbackMessage.classList.remove('correct');
+  }
+
+  // 🔴 🔥 Enregistrer dans Firestore
+  db.collection("reponsesQuiz").add({
+        participant: participantNom,
+        question: numero,
+        reponseDonnee: reponse.value,
+        bonneReponse: bonneReponse,
+        correcte: estCorrect,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+      document.getElementById(`question${numero}`).classList.remove("active");
+      feedback.classList.add("active");
+    }
+
+    function verifierReponseToujoursCorrecte(numeroQuestion) {
+  const saisie = document.getElementById(`reponse${numeroQuestion}`).value.trim();
+
+  const feedback = document.getElementById(`feedback${numeroQuestion}`);
+  const feedbackMessage = document.getElementById(`feedback${numeroQuestion}Message`);
+
+  feedbackMessage.textContent = "Bonne réponse !";
+  feedbackMessage.classList.add('correct');
+
+  score++;
+
+  // 🔥 AJOUT FIRESTORE (manquant)
+  db.collection("reponsesQuiz").add({
+    participant: participantNom,
+    question: numeroQuestion,
+    reponseDonnee: saisie,
+    bonneReponse: "Toutes", // ou ce que tu veux
+    correcte: true,
+    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+  });
+
+  document.getElementById(`question${numeroQuestion}`).classList.remove("active");
+  feedback.classList.add("active");
+  }
+
+    function verifierReponseTexte(numeroQuestion, bonnesReponses) {
+    const saisie = document.getElementById(`reponse${numeroQuestion}`).value.trim().toLowerCase();
+    const feedback = document.getElementById(`feedback${numeroQuestion}`);
+    const feedbackMessage = document.getElementById(`feedback${numeroQuestion}Message`);
+
+  // Vérifie si la saisie correspond à une des bonnes réponses
+  const estCorrect = bonnesReponses.some(rep => saisie === rep.toLowerCase());
+
+  if (estCorrect) {
+    feedbackMessage.textContent = "Bonne réponse !";
+    feedbackMessage.classList.add('correct');
+    feedbackMessage.classList.remove('incorrect');
+    score++;
+  } else {
+    feedbackMessage.textContent = `Mauvaise réponse ! Les bonnes réponses possibles étaient : ${bonnesReponses.join(', ')}.`;
+    feedbackMessage.classList.add('incorrect');
+    feedbackMessage.classList.remove('correct');
+  }
+
+  // 🔥 Enregistrer dans Firestore
+  db.collection("reponsesQuiz").add({
+    participant: participantNom,
+    question: numeroQuestion,
+    reponseDonnee: saisie,
+    bonnesReponses: bonnesReponses,
+    bonneReponse: bonnesReponses[0],
+    correcte: estCorrect,
+    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+  });
+
+  document.getElementById(`question${numeroQuestion}`).classList.remove("active");
+  feedback.classList.add("active");
+}
+
+    // Fonction pour passer à la question suivante ou afficher le score final
+    function suivant(numero){
+        // Liste des sauts spéciaux (page explicative, etc.)
+        const prochainBloc = {
+          29: 'resultat',
+        };
+
+      // Trouver l'élément suivant à afficher
+      const suivantId = prochainBloc[numero] !== undefined ? prochainBloc[numero] : numero + 1;
+
+      // Cacher l'élément actuel (question ou feedback)
+      const actuelId = typeof numero === "string" ? numero : `feedback${numero}`;
+      const actuelElement = document.getElementById(actuelId);
+      if (actuelElement) {
+        actuelElement.classList.remove("active");
+      }
+
+      // Si on arrive au résultat final
+      if (suivantId === 'resultat') {
+          document.getElementById("resultat").classList.add("active");
+          document.getElementById("score").textContent = `Votre score : ${score} / 29`; // adapte au total
+          // 🔥 Enregistrement du score final dans Firestore
+          db.collection("scoresQuiz").add({
+          participant: participantNom,
+          score: score,
+          totalQuestions: 29, // ajuste ce nombre si tu en ajoutes
+          timestamp: firebase.firestore.FieldValue.serverTimestamp()
+          });
+      } else {
+      // Afficher la question ou explication suivante
+      const nextElement = typeof suivantId === "number"
+      ? document.getElementById(`question${suivantId}`)
+      : document.getElementById(suivantId);
+
+      if (nextElement) {
+        nextElement.classList.add("active");
+      }
+
+      // Arrêter tous les lecteurs audio
+          const audios = document.querySelectorAll('audio');
+          audios.forEach(audio => {
+          audio.pause();
+          audio.currentTime = 0;
+      });
+
+      // Arrêter tous les lecteurs vidéo
+          const videos = document.querySelectorAll('video');
+          videos.forEach(video => {
+          video.pause();
+          video.currentTime = 0;
+      });}
+    if (suivantId === 'resultat') {
+  document.getElementById("resultat").classList.add("active");
+  document.getElementById("score").textContent = `Votre score : ${score} / 29`; // adapte au total
+  }
+
+  // 🔥 Enregistrement du score final dans Firestore
+  db.collection("scoresQuiz").add({
+    participant: participantNom,
+    score: score,
+    totalQuestions: 29, // ajuste ce nombre si tu en ajoutes
+    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+  })};
+
+    // Fonction pour recommencer le quiz
+    function recommencerQuiz() {
+  // Réinitialiser les variables et le score
+  score = 0;
+
+  // Réinitialiser tous les éléments du quiz
+  const questions = document.querySelectorAll('.question');
+  questions.forEach((q) => q.classList.remove('active'));
+
+  // Réinitialiser les boutons radio et champs texte
+  const radios = document.querySelectorAll('input[type="radio"]');
+  radios.forEach((radio) => radio.checked = false);
+
+  const textes = document.querySelectorAll('input[type="text"]');
+  textes.forEach((champ) => champ.value = '');
+
+  // Réafficher l'écran d'identité (nom)
+  document.getElementById("identite").style.display = "block";
+
+  // Cacher la section quiz
+  document.getElementById("quiz").style.display = "none";
+}
+
+  // 🔧 Configuration Firebase (à adapter avec tes vraies infos)
+  const firebaseConfig = {
+    apiKey: "AIzaSyBti3RBAO8HjFYRuwyLFIEI_v2qmufe3Ig",
+    authDomain: "quizz2-c94de.firebaseapp.com",
+    databaseURL: "https://quizz2-c94de-default-rtdb.firebaseio.com/",
+    projectId: "quizz2-c94de",
+    storageBucket: "quizz2-c94de.firebasestorage.app",
+    messagingSenderId: "177475808220",
+    appId: "1:177475808220:web:c2b8cce394abc533e3bd19",
+};
+
+  //Passer à la question suivante pour les zones de texte
+
+  // 🔥 Initialisation Firebase + Firestore
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+function allerAQuestion() {
+  const select = document.getElementById("goToQuestion");
+  const numero = select.value;
+  if (numero) {
+    // Cacher toutes les questions et feedback
+    document.querySelectorAll('.question').forEach(div => {
+      div.classList.remove('active');
+    });
+
+    // Activer la question choisie
+    const question = document.getElementById(`question${numero}`);
+    if (question) {
+      question.classList.add('active');
+    }
+  }
+}
+</script>
+</body>
+</html>
