@@ -11,3 +11,9 @@ a:visited {
   color: #58a6ff;
   text-decoration: none;
 }
+
+background-image {
+  background-image: url('bg.jpg');
+  background-size: cover;
+  background-position: center;
+}
